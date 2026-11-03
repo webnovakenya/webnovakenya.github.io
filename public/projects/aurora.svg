@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1050" viewBox="0 0 1400 1050">
+  <defs>
+    <linearGradient id="auroraBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1513"/>
+      <stop offset="0.5" stop-color="#17332d"/>
+      <stop offset="1" stop-color="#09100f"/>
+    </linearGradient>
+    <radialGradient id="auroraGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#e9e4d6"/>
+      <stop offset="0.48" stop-color="#b6bda9" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#0a1513" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bottleCream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4efe4"/>
+      <stop offset="0.55" stop-color="#d9d1c0"/>
+      <stop offset="1" stop-color="#a59c89"/>
+    </linearGradient>
+    <linearGradient id="bottleAmber" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9b98a"/>
+      <stop offset="0.55" stop-color="#9b7449"/>
+      <stop offset="1" stop-color="#5e4228"/>
+    </linearGradient>
+    <filter id="auroraGrain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="1050" fill="url(#auroraBg)"/>
+  <circle cx="920" cy="480" r="430" fill="url(#auroraGlow)" opacity="0.9"/>
+  <circle cx="920" cy="480" r="300" fill="none" stroke="#ece6d8" stroke-opacity="0.12"/>
+  <circle cx="920" cy="480" r="410" fill="none" stroke="#ece6d8" stroke-opacity="0.06"/>
+
+  <g stroke="#ece6d8" stroke-opacity="0.07">
+    <line x1="0" y1="90" x2="1400" y2="90"/>
+    <line x1="0" y1="960" x2="1400" y2="960"/>
+    <line x1="90" y1="0" x2="90" y2="1050"/>
+    <line x1="1310" y1="0" x2="1310" y2="1050"/>
+  </g>
+
+  <text x="90" y="135" fill="#ece6d8" font-family="Helvetica, Arial, sans-serif" font-size="22" letter-spacing="11">AURORA</text>
+  <text x="690" y="135" fill="#ece6d8" fill-opacity="0.5" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="5">SHOP</text>
+  <text x="800" y="135" fill="#ece6d8" fill-opacity="0.5" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="5">RITUAL</text>
+  <text x="920" y="135" fill="#ece6d8" fill-opacity="0.5" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="5">STORY</text>
+  <text x="1190" y="135" fill="#ece6d8" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">CART (0)</text>
+
+  <g>
+    <ellipse cx="920" cy="815" rx="245" ry="34" fill="#050b0a" opacity="0.55"/>
+    <rect x="830" y="470" width="120" height="330" rx="20" fill="url(#bottleAmber)"/>
+    <rect x="862" y="430" width="56" height="58" rx="8" fill="#6d5133"/>
+    <rect x="852" y="560" width="76" height="120" fill="#ece6d8" opacity="0.88"/>
+    <text x="866" y="600" fill="#22332c" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">AURORA</text>
+    <text x="866" y="622" fill="#22332c" fill-opacity="0.6" font-family="Helvetica, Arial, sans-serif" font-size="8" letter-spacing="2">N° 01 SERUM</text>
+    <rect x="972" y="545" width="148" height="255" rx="18" fill="url(#bottleCream)"/>
+    <rect x="1014" y="505" width="64" height="50" rx="7" fill="#c8c0b0"/>
+    <text x="998" y="640" fill="#27322c" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">AURORA</text>
+    <text x="998" y="662" fill="#27322c" fill-opacity="0.55" font-family="Helvetica, Arial, sans-serif" font-size="8" letter-spacing="2">N° 02 BALM</text>
+    <rect x="1008" y="700" width="76" height="46" fill="#27322c" opacity="0.85"/>
+    <text x="1020" y="728" fill="#ece6d8" font-family="Helvetica, Arial, sans-serif" font-size="8" letter-spacing="2">ADD — $38</text>
+  </g>
+
+  <text x="90" y="780" fill="#ece6d8" font-family="Georgia, 'Times New Roman', serif" font-size="132" letter-spacing="-6">Skin,</text>
+  <text x="90" y="908" fill="#ece6d8" font-family="Georgia, 'Times New Roman', serif" font-size="132" font-style="italic" letter-spacing="-6">reimagined.</text>
+  <text x="95" y="980" fill="#ece6d8" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="5">BOTANICAL RITUALS FOR MODERN SKIN</text>
+
+  <g transform="translate(1120 200)">
+    <rect width="190" height="96" fill="#ece6d8" fill-opacity="0.06" stroke="#ece6d8" stroke-opacity="0.14"/>
+    <text x="18" y="32" fill="#ece6d8" fill-opacity="0.5" font-family="Helvetica, Arial, sans-serif" font-size="9" letter-spacing="3">NEW ARRIVAL</text>
+    <text x="18" y="58" fill="#ece6d8" font-family="Helvetica, Arial, sans-serif" font-size="16">The night ritual</text>
+    <text x="18" y="78" fill="#d8ff9c" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="1">EXPLORE — $92</text>
+  </g>
+
+  <rect width="1400" height="1050" filter="url(#auroraGrain)" opacity="0.9"/>
+</svg>

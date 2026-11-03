@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1050" viewBox="0 0 1400 1050">
+  <defs>
+    <linearGradient id="northBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080d1a"/>
+      <stop offset="0.55" stop-color="#101d35"/>
+      <stop offset="1" stop-color="#060a13"/>
+    </linearGradient>
+    <radialGradient id="northGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#6f9dff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#6f9dff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="northCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.09"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.035"/>
+    </linearGradient>
+    <filter id="northGrain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.055"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="1050" fill="url(#northBg)"/>
+  <circle cx="1080" cy="470" r="480" fill="url(#northGlow)"/>
+  <g stroke="#dce8ff" stroke-opacity="0.06">
+    <line x1="0" y1="150" x2="1400" y2="150"/>
+    <line x1="0" y1="900" x2="1400" y2="900"/>
+    <line x1="110" y1="0" x2="110" y2="1050"/>
+    <line x1="1290" y1="0" x2="1290" y2="1050"/>
+  </g>
+
+  <text x="90" y="140" fill="#eef4ff" font-family="Helvetica, Arial, sans-serif" font-size="25" font-weight="bold" letter-spacing="2">NORTH</text>
+  <text x="620" y="138" fill="#eef4ff" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">STAYS</text>
+  <text x="740" y="138" fill="#eef4ff" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">EXPERIENCES</text>
+  <text x="960" y="138" fill="#eef4ff" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">JOURNAL</text>
+  <rect x="1120" y="112" width="190" height="42" rx="21" fill="#9cc3ff"/>
+  <text x="1215" y="138" fill="#0a1220" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="2" text-anchor="middle">BOOK A STAY</text>
+
+  <text x="90" y="360" fill="#eef4ff" font-family="Georgia, 'Times New Roman', serif" font-size="106" letter-spacing="-4">A quieter kind</text>
+  <text x="90" y="466" fill="#eef4ff" font-family="Georgia, 'Times New Roman', serif" font-size="106" font-style="italic" letter-spacing="-4">of escape.</text>
+  <text x="96" y="536" fill="#eef4ff" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4">CABINS, COASTAL HIDEAWAYS &amp; DESIGN RETREATS</text>
+
+  <g transform="translate(740 260)">
+    <rect width="570" height="590" rx="24" fill="url(#northCard)" stroke="#eef4ff" stroke-opacity="0.12"/>
+    <text x="34" y="48" fill="#eef4ff" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">CHECK AVAILABILITY</text>
+    <text x="34" y="94" fill="#eef4ff" font-family="Georgia, 'Times New Roman', serif" font-size="34">September 2026</text>
+    <g font-family="Helvetica, Arial, sans-serif" font-size="10" fill="#eef4ff" fill-opacity="0.3">
+      <text x="40" y="142">M</text>
+      <text x="112" y="142">T</text>
+      <text x="184" y="142">W</text>
+      <text x="256" y="142">T</text>
+      <text x="328" y="142">F</text>
+      <text x="400" y="142">S</text>
+      <text x="472" y="142">S</text>
+    </g>
+    <g font-family="Helvetica, Arial, sans-serif" font-size="13">
+      <g fill="#eef4ff" fill-opacity="0.55">
+        <text x="40" y="184">1</text><text x="112" y="184">2</text><text x="184" y="184">3</text><text x="256" y="184">4</text><text x="328" y="184">5</text><text x="400" y="184">6</text><text x="472" y="184">7</text>
+        <text x="40" y="228">8</text><text x="112" y="228">9</text><text x="184" y="228">10</text><text x="256" y="228">11</text><text x="400" y="228">13</text><text x="472" y="228">14</text>
+        <text x="40" y="272">15</text><text x="112" y="272">16</text><text x="184" y="272">17</text><text x="256" y="272">18</text><text x="328" y="272">19</text><text x="400" y="272">20</text><text x="472" y="272">21</text>
+        <text x="40" y="316">22</text><text x="112" y="316">23</text><text x="184" y="316">24</text><text x="256" y="316">25</text><text x="328" y="316">26</text><text x="400" y="316">27</text><text x="472" y="316">28</text>
+        <text x="40" y="360">29</text><text x="112" y="360">30</text>
+      </g>
+      <circle cx="343" cy="223" r="20" fill="#9cc3ff"/>
+      <text x="343" y="228" fill="#0a1220" font-weight="bold" text-anchor="middle">12</text>
+      <circle cx="415" cy="267" r="20" fill="none" stroke="#9cc3ff" stroke-opacity="0.6"/>
+      <text x="415" y="272" fill="#9cc3ff" text-anchor="middle">20</text>
+    </g>
+    <line x1="34" y1="400" x2="536" y2="400" stroke="#eef4ff" stroke-opacity="0.1"/>
+    <text x="34" y="438" fill="#eef4ff" fill-opacity="0.4" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">SELECTED — SEP 12</text>
+    <g>
+      <rect x="34" y="458" width="150" height="58" rx="10" fill="#9cc3ff"/>
+      <text x="109" y="492" fill="#0a1220" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CHECK IN →</text>
+      <rect x="196" y="458" width="150" height="58" rx="10" fill="#eef4ff" fill-opacity="0.06" stroke="#eef4ff" stroke-opacity="0.12"/>
+      <text x="271" y="492" fill="#eef4ff" fill-opacity="0.6" font-family="Helvetica, Arial, sans-serif" font-size="12" text-anchor="middle">3 NIGHTS</text>
+      <text x="372" y="482" fill="#eef4ff" fill-opacity="0.35" font-family="Helvetica, Arial, sans-serif" font-size="9" letter-spacing="2">TOTAL</text>
+      <text x="372" y="502" fill="#eef4ff" font-family="Georgia, 'Times New Roman', serif" font-size="20">$1,140</text>
+    </g>
+  </g>
+
+  <g transform="translate(90 660)">
+    <rect width="580" height="260" fill="#eef4ff" fill-opacity="0.04" stroke="#eef4ff" stroke-opacity="0.1"/>
+    <text x="30" y="42" fill="#9cc3ff" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">THE ORIGINAL CABIN — NORWAY</text>
+    <text x="30" y="108" fill="#eef4ff" font-family="Georgia, 'Times New Roman', serif" font-size="44">Nine cabins.</text>
+    <text x="30" y="154" fill="#eef4ff" font-family="Georgia, 'Times New Roman', serif" font-size="44" font-style="italic">One horizon.</text>
+    <text x="30" y="196" fill="#eef4ff" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="11" letter-spacing="1">Architect-designed stays in the quiet corners of the north.</text>
+    <text x="30" y="232" fill="#eef4ff" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3">EXPLORE THE COLLECTION ↗</text>
+  </g>
+
+  <text x="90" y="1000" fill="#eef4ff" fill-opacity="0.3" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">BOOKING PLATFORM — 2025</text>
+  <text x="1180" y="1000" fill="#eef4ff" fill-opacity="0.3" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">NORTH / 64.1466° N</text>
+
+  <rect width="1400" height="1050" filter="url(#northGrain)" opacity="0.9"/>
+</svg>

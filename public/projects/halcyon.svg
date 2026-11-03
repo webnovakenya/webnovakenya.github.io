@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1050" viewBox="0 0 1400 1050">
+  <defs>
+    <linearGradient id="halcyonPaper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eee7d8"/>
+      <stop offset="1" stop-color="#d8cfbd"/>
+    </linearGradient>
+    <linearGradient id="halcyonArch" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2925"/>
+      <stop offset="0.55" stop-color="#716c60"/>
+      <stop offset="1" stop-color="#181715"/>
+    </linearGradient>
+    <linearGradient id="halcyonSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b8b1a0"/>
+      <stop offset="1" stop-color="#6f6a5e"/>
+    </linearGradient>
+    <filter id="halcyonGrain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="1050" fill="url(#halcyonPaper)"/>
+  <circle cx="1175" cy="214" r="138" fill="#d24a1f"/>
+  <circle cx="1175" cy="214" r="184" fill="none" stroke="#1c1b18" stroke-opacity="0.14"/>
+
+  <text x="90" y="128" fill="#1c1b18" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" letter-spacing="3">HALCYON</text>
+  <text x="610" y="126" fill="#1c1b18" fill-opacity="0.55" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">PROJECTS</text>
+  <text x="740" y="126" fill="#1c1b18" fill-opacity="0.55" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">STUDIO</text>
+  <text x="845" y="126" fill="#1c1b18" fill-opacity="0.55" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">JOURNAL</text>
+  <text x="1180" y="126" fill="#1c1b18" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="4">ENQUIRE ↗</text>
+
+  <text x="90" y="360" fill="#1c1b18" font-family="Georgia, 'Times New Roman', serif" font-size="112" letter-spacing="-5">Architecture</text>
+  <text x="90" y="470" fill="#1c1b18" font-family="Georgia, 'Times New Roman', serif" font-size="112" font-style="italic" letter-spacing="-5">for slower living.</text>
+  <text x="96" y="536" fill="#1c1b18" fill-opacity="0.58" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="4">RESIDENTIAL / CULTURAL / INTERIOR</text>
+
+  <g transform="translate(760 240)">
+    <rect width="550" height="700" fill="url(#halcyonArch)"/>
+    <rect x="46" y="46" width="458" height="290" fill="url(#halcyonSky)"/>
+    <circle cx="300" cy="205" r="118" fill="#d24a1f" opacity="0.9"/>
+    <rect x="46" y="390" width="212" height="264" fill="#0f0e0d"/>
+    <rect x="292" y="390" width="212" height="264" fill="#b3ab99"/>
+    <path d="M46 654V520c0-58 47-105 106-105s106 47 106 105v134Z" fill="#2a2925"/>
+    <path d="M292 654V476c0-47 39-86 106-86s106 39 106 86v178Z" fill="#ded6c5"/>
+    <g stroke="#f1ede4" stroke-opacity="0.18">
+      <line x1="46" y1="390" x2="504" y2="390"/>
+      <line x1="46" y1="470" x2="258" y2="470"/>
+      <line x1="292" y1="470" x2="504" y2="470"/>
+    </g>
+    <text x="486" y="86" fill="#f1ede4" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="3" text-anchor="end">CASA MIRA — 2025</text>
+  </g>
+
+  <g transform="translate(90 660)">
+    <rect width="580" height="250" fill="#1c1b18"/>
+    <text x="30" y="44" fill="#f1ede4" fill-opacity="0.45" font-family="Helvetica, Arial, sans-serif" font-size="9" letter-spacing="3">FEATURED PROJECT</text>
+    <text x="30" y="112" fill="#f1ede4" font-family="Georgia, 'Times New Roman', serif" font-size="54" letter-spacing="-1">Casa Mira</text>
+    <text x="30" y="150" fill="#f1ede4" fill-opacity="0.55" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2">A coastal residence shaped by light,</text>
+    <text x="30" y="170" fill="#f1ede4" fill-opacity="0.55" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="2">stone and the rhythms of the day.</text>
+    <text x="30" y="218" fill="#d24a1f" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">VIEW PROJECT ↗</text>
+  </g>
+
+  <text x="90" y="1000" fill="#1c1b18" fill-opacity="0.4" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">LISBON — 38.7223° N / 9.1393° W</text>
+  <text x="1180" y="1000" fill="#1c1b18" fill-opacity="0.4" font-family="Helvetica, Arial, sans-serif" font-size="10" letter-spacing="4">SCROLL TO EXPLORE</text>
+
+  <rect width="1400" height="1050" filter="url(#halcyonGrain)" opacity="0.9"/>
+</svg>
