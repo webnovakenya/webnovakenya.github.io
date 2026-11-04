@@ -1,16 +1,61 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, Check } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Briefcase,
+  Check,
+  Code2,
+  LayoutTemplate,
+  Loader2,
+  ShoppingBag,
+  Wrench,
+} from 'lucide-react'
 import { DribbbleIcon, InstagramIcon, LinkedinIcon, XIcon } from './SocialIcons'
 import Eyebrow from './Eyebrow'
 import Reveal from './Reveal'
 import SplitHeading from './SplitHeading'
-import Magnetic from './Magnetic'
 import { EASE } from '../lib/motion'
 import { scrollToSection } from '../lib/scroll'
+import { CONTACT_INTENT_EVENT } from '../lib/contactIntent'
 
-const projectTypes = ['Business site', 'E-commerce', 'Booking system', 'Portfolio', 'Custom app', 'Not sure yet']
+const FORM_ENDPOINT = ''
+const CONTACT_EMAIL = 'webnovat3ch@gmail.com'
+
+const services = [
+  {
+    value: 'Business Website',
+    icon: Briefcase,
+    description: 'A credible digital home for your company, practice or consultancy.',
+  },
+  {
+    value: 'Online Store',
+    icon: ShoppingBag,
+    description: 'A considered storefront built around products people want to buy.',
+  },
+  {
+    value: 'Custom Web App',
+    icon: Code2,
+    description: 'A tailored tool, dashboard or platform built around how you work.',
+  },
+  {
+    value: 'Portfolio / Landing Page',
+    icon: LayoutTemplate,
+    description: 'A focused place to show your work, launch an idea or tell one story well.',
+  },
+  {
+    value: 'Website Management / Maintenance',
+    icon: Wrench,
+    description: 'Ongoing care, content updates and technical support for an existing site.',
+    wide: true,
+  },
+]
+
 const budgets = ['Ksh 20k — 50k', 'Ksh 50k — 100k', 'Ksh 100k — 250k', 'Ksh 250k — 500k', 'Ksh 500k+']
+const timelines = ['As soon as possible', '2 — 4 weeks', '1 — 2 months', 'Flexible / exploring']
+
+const steps = ['Brief', 'Scope', 'Details']
 
 const socials = [
   { label: 'Instagram', href: 'https://www.instagram.com', icon: InstagramIcon },
@@ -19,8 +64,19 @@ const socials = [
   { label: 'X / Twitter', href: 'https://x.com', icon: XIcon },
 ]
 
-function Field({ label, name, type = 'text', value, onChange, placeholder, error, required, textarea = false }) {
+const emptyForm = {
+  service: '',
+  budget: 'Ksh 100k — 250k',
+  timeline: '',
+  name: '',
+  email: '',
+  message: '',
+  website: '',
+}
+
+function Field({ label, name, type = 'text', value, onChange, placeholder, error, required, textarea = false, autoComplete }) {
   const id = `field-${name}`
+  const errorId = `${id}-error`
   const inputClasses = `form-field mt-2 ${error ? 'border-rust/70' : ''}`
 
   return (
@@ -30,17 +86,24 @@ function Field({ label, name, type = 'text', value, onChange, placeholder, error
           {label}
           {required && <span className="ml-1 text-royal">*</span>}
         </label>
-        {error && <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-rust">{error}</span>}
+        {error && (
+          <span id={errorId} role="alert" className="font-mono text-[9px] uppercase tracking-[0.12em] text-rust">
+            {error}
+          </span>
+        )}
       </div>
       {textarea ? (
         <textarea
           id={id}
           name={name}
-          rows={3}
+          rows={5}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
           className={`${inputClasses} resize-none`}
+          required={required}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? errorId : undefined}
         />
       ) : (
         <input
@@ -51,7 +114,10 @@ function Field({ label, name, type = 'text', value, onChange, placeholder, error
           onChange={onChange}
           placeholder={placeholder}
           className={inputClasses}
-          autoComplete={name === 'email' ? 'email' : name === 'name' ? 'name' : 'organization'}
+          autoComplete={autoComplete}
+          required={required}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? errorId : undefined}
         />
       )}
     </div>
@@ -59,58 +125,181 @@ function Field({ label, name, type = 'text', value, onChange, placeholder, error
 }
 
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    company: '',
-    type: 'Business site',
-    budget: 'Ksh 100k — 250k',
-    message: '',
-  })
+  const [step, setStep] = useState(0)
+  const [form, setForm] = useState(emptyForm)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')
-  const timeoutRef = useRef(null)
+  const [delivery, setDelivery] = useState(null)
+  const [submitError, setSubmitError] = useState('')
+  const reduceMotion = useReducedMotion() ?? false
+  const stepHeadingRef = useRef(null)
+  const successHeadingRef = useRef(null)
+  const shouldFocusStep = useRef(false)
+  const intentFocusTimeout = useRef(null)
 
-  useEffect(
-    () => () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    },
-    [],
-  )
+  useEffect(() => {
+    const onContactIntent = (event) => {
+      const service = event.detail?.service
+      if (!services.some((item) => item.value === service)) return
+
+      setForm((current) => ({ ...current, service }))
+      setErrors((current) => ({ ...current, service: undefined }))
+      setStatus('idle')
+      setDelivery(null)
+      setSubmitError('')
+      setStep(0)
+      window.clearTimeout(intentFocusTimeout.current)
+      intentFocusTimeout.current = window.setTimeout(
+        () => stepHeadingRef.current?.focus({ preventScroll: true }),
+        520,
+      )
+    }
+
+    window.addEventListener(CONTACT_INTENT_EVENT, onContactIntent)
+    return () => {
+      window.removeEventListener(CONTACT_INTENT_EVENT, onContactIntent)
+      window.clearTimeout(intentFocusTimeout.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!shouldFocusStep.current) return undefined
+    shouldFocusStep.current = false
+    const timeout = window.setTimeout(
+      () => stepHeadingRef.current?.focus(),
+      reduceMotion ? 60 : 320,
+    )
+    return () => window.clearTimeout(timeout)
+  }, [step, reduceMotion])
+
+  const getStepErrors = (targetStep) => {
+    const nextErrors = {}
+
+    if (targetStep === 0 && !form.service) {
+      nextErrors.service = 'Choose the closest fit'
+    }
+
+    if (targetStep === 1) {
+      if (!form.budget) nextErrors.budget = 'Choose a range'
+      if (!form.timeline) nextErrors.timeline = 'Choose a timeline'
+    }
+
+    if (targetStep === 2) {
+      if (!form.name.trim()) nextErrors.name = 'Required'
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Valid email required'
+      if (form.message.trim().length < 10) nextErrors.message = 'A little more detail'
+    }
+
+    return nextErrors
+  }
+
+  const validateStep = (targetStep) => {
+    const nextErrors = getStepErrors(targetStep)
+    setErrors(nextErrors)
+    return Object.keys(nextErrors).length === 0
+  }
 
   const update = (event) => {
     const { name, value } = event.target
     setForm((current) => ({ ...current, [name]: value }))
     setErrors((current) => ({ ...current, [name]: undefined }))
+    setSubmitError('')
   }
 
-  const handleSubmit = (event) => {
+  const choose = (name, value) => {
+    setForm((current) => ({ ...current, [name]: value }))
+    setErrors((current) => ({ ...current, [name]: undefined }))
+    setSubmitError('')
+  }
+
+  const goNext = () => {
+    if (!validateStep(step)) return
+    shouldFocusStep.current = true
+    setStep((current) => Math.min(current + 1, 2))
+  }
+
+  const goBack = () => {
+    shouldFocusStep.current = true
+    setErrors({})
+    setSubmitError('')
+    setStep((current) => Math.max(current - 1, 0))
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
+    if (status === 'sending') return
 
-    const nextErrors = {}
-    if (!form.name.trim()) nextErrors.name = 'Required'
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) nextErrors.email = 'Valid email required'
-    if (form.message.trim().length < 10) nextErrors.message = 'A little more detail'
+    if (!validateStep(2)) return
 
-    setErrors(nextErrors)
-    if (Object.keys(nextErrors).length) return
+    if (form.website.trim()) {
+      setDelivery('api')
+      setStatus('sent')
+      return
+    }
 
     setStatus('sending')
-    timeoutRef.current = setTimeout(() => setStatus('sent'), 900)
+    setSubmitError('')
+
+    const payload = {
+      name: form.name,
+      email: form.email,
+      service: form.service,
+      budget: form.budget,
+      timeline: form.timeline,
+      message: form.message,
+      _subject: `New project enquiry — ${form.service}`,
+      source: 'webnovakenya.github.io',
+    }
+
+    try {
+      if (FORM_ENDPOINT) {
+        const response = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(payload),
+        })
+
+        if (!response.ok) throw new Error('Enquiry failed')
+        setDelivery('api')
+        setStatus('sent')
+        return
+      }
+
+      const subject = encodeURIComponent(`New project enquiry — ${form.service}`)
+      const body = encodeURIComponent(
+        [
+          `Name: ${form.name}`,
+          `Email: ${form.email}`,
+          `Service: ${form.service}`,
+          `Budget: ${form.budget}`,
+          `Timeline: ${form.timeline}`,
+          '',
+          form.message,
+        ].join('\n'),
+      )
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
+      setDelivery('email')
+      setStatus('sent')
+    } catch {
+      setStatus('error')
+      setSubmitError(`The form could not send just now. Please email ${CONTACT_EMAIL} directly.`)
+    }
   }
 
   const reset = () => {
-    setForm({
-      name: '',
-      email: '',
-      company: '',
-      type: 'Business site',
-      budget: 'Ksh 100k — 250k',
-      message: '',
-    })
+    shouldFocusStep.current = true
+    setForm(emptyForm)
     setErrors({})
     setStatus('idle')
+    setDelivery(null)
+    setSubmitError('')
+    setStep(0)
   }
+
+  const progress = status === 'sent' ? 3 : step + 1
 
   return (
     <section id="contact" className="relative overflow-hidden bg-ink py-24 text-bone sm:py-32">
@@ -150,10 +339,10 @@ export default function Contact() {
                   Prefer email?
                 </p>
                 <a
-                  href="mailto:webnovat3ch@gmail.com"
+                  href={`mailto:${CONTACT_EMAIL}`}
                   className="link-line mt-3 flex w-fit items-center gap-2 font-heading text-xl font-semibold tracking-[-0.02em] text-bone transition-colors hover:text-royal sm:text-2xl"
                 >
-                  webnovat3ch@gmail.com
+                  {CONTACT_EMAIL}
                   <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
                 </a>
                 <a
@@ -197,42 +386,66 @@ export default function Contact() {
             </Reveal>
           </div>
 
-          <div className="lg:col-span-6 lg:col-start-7">
+          <div id="project-enquiry" className="scroll-mt-24 lg:col-span-6 lg:col-start-7">
             <Reveal delay={0.1}>
               <div className="relative border border-white/10 bg-white/[0.02] p-5 sm:p-8">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" initial={false}>
                   {status === 'sent' ? (
                     <motion.div
                       key="success"
-                      className="flex min-h-[520px] flex-col justify-between"
+                      className="flex min-h-[610px] flex-col justify-between"
                       initial={{ opacity: 0, y: 18 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -18 }}
-                      transition={{ duration: 0.5, ease: EASE }}
+                      transition={{ duration: reduceMotion ? 0 : 0.5, ease: EASE }}
+                      onAnimationComplete={() => successHeadingRef.current?.focus()}
                     >
                       <div>
                         <div className="flex items-center justify-between">
                           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/72">
-                            Enquiry received
+                            {delivery === 'email' ? 'Brief prepared' : 'Enquiry received'}
                           </span>
-                          <span className="grid h-10 w-10 place-items-center rounded-full bg-royal text-ink">
+                          <motion.span
+                            className="grid h-10 w-10 place-items-center rounded-full bg-royal text-ink"
+                            initial={reduceMotion ? false : { scale: 0.6, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: reduceMotion ? 0 : 0.5, ease: EASE }}
+                          >
                             <Check className="h-4 w-4" strokeWidth={2.25} />
-                          </span>
+                          </motion.span>
                         </div>
 
-                        <h3 className="mt-16 font-heading text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl">
+                        <h3
+                          ref={successHeadingRef}
+                          tabIndex={-1}
+                          className="mt-16 font-heading text-4xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-5xl"
+                        >
                           Thank you,
                           <br />
                           {form.name.split(' ')[0] || 'friend'}.
                         </h3>
                         <p className="mt-5 max-w-sm text-base leading-relaxed text-bone/72">
-                          Your message is in. We&apos;ll read it properly and get back to you within one
-                          business day — usually sooner.
+                          {delivery === 'email' ? (
+                            <>
+                              Your email app is opening with the brief ready to send. If it doesn&apos;t
+                              open, email{' '}
+                              <a href={`mailto:${CONTACT_EMAIL}`} className="link-line text-bone">
+                                {CONTACT_EMAIL}
+                              </a>{' '}
+                              directly.
+                            </>
+                          ) : (
+                            <>
+                              Your message is in. We&apos;ll read it properly and get back to you within
+                              one business day — usually sooner.
+                            </>
+                          )}
                         </p>
 
                         <div className="mt-8 border-t border-white/10 pt-5 font-mono text-[11px] uppercase leading-relaxed tracking-[0.18em] text-bone/72">
-                          <p>{form.type}</p>
+                          <p>{form.service}</p>
                           <p className="mt-1">{form.budget}</p>
+                          <p className="mt-1">{form.timeline}</p>
                         </div>
                       </div>
 
@@ -262,128 +475,346 @@ export default function Contact() {
                       key="form"
                       onSubmit={handleSubmit}
                       noValidate
+                      className="flex min-h-[610px] flex-col"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0, y: -12 }}
-                      transition={{ duration: 0.35 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.35 }}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/72">
                           Start a project
                         </span>
-                        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/20">
-                          * Required
+                        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/35">
+                          Step {step + 1} of 3
                         </span>
                       </div>
 
-                      <div className="mt-8 grid gap-6 sm:grid-cols-2">
-                        <Field
-                          label="Your name"
-                          name="name"
-                          value={form.name}
-                          onChange={update}
-                          placeholder="Jane Smith"
-                          error={errors.name}
-                          required
-                        />
-                        <Field
-                          label="Email address"
-                          name="email"
-                          type="email"
-                          value={form.email}
-                          onChange={update}
-                          placeholder="jane@company.com"
-                          error={errors.email}
-                          required
+                      <div
+                        className="mt-4 h-[2px] overflow-hidden bg-white/10"
+                        role="progressbar"
+                        aria-label="Project enquiry progress"
+                        aria-valuemin={1}
+                        aria-valuemax={3}
+                        aria-valuenow={step + 1}
+                      >
+                        <motion.div
+                          className="h-full origin-left bg-royal"
+                          animate={{ scaleX: progress / 3 }}
+                          transition={{ duration: reduceMotion ? 0 : 0.5, ease: EASE }}
                         />
                       </div>
 
-                      <div className="mt-6">
-                        <Field
-                          label="Company / organisation"
-                          name="company"
-                          value={form.company}
-                          onChange={update}
-                          placeholder="Optional"
-                        />
+                      <div className="mt-2 flex justify-between font-mono text-[8px] uppercase tracking-[0.15em] text-bone/30">
+                        {steps.map((label, index) => (
+                          <span key={label} className={index <= step ? 'text-bone/65' : ''}>
+                            {label}
+                          </span>
+                        ))}
                       </div>
 
-                      <fieldset className="mt-7">
-                        <legend className="font-mono text-[11px] uppercase tracking-[0.2em] text-bone/75">
-                          Project type
-                        </legend>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {projectTypes.map((type) => (
-                            <button
-                              key={type}
-                              type="button"
-                              onClick={() => setForm((current) => ({ ...current, type }))}
-                              aria-pressed={form.type === type}
-                              className={`border px-3 py-2 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors ${
-                                form.type === type
-                                  ? 'border-royal bg-royal text-ink'
-                                  : 'border-white/15 text-bone/80 hover:border-white/35 hover:text-bone'
-                              }`}
-                            >
-                              {type}
-                            </button>
-                          ))}
-                        </div>
-                      </fieldset>
-
-                      <fieldset className="mt-6">
-                        <legend className="font-mono text-[11px] uppercase tracking-[0.2em] text-bone/75">
-                          Budget range
-                        </legend>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {budgets.map((budget) => (
-                            <button
-                              key={budget}
-                              type="button"
-                              onClick={() => setForm((current) => ({ ...current, budget }))}
-                              aria-pressed={form.budget === budget}
-                              className={`border px-3 py-2 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors ${
-                                form.budget === budget
-                                  ? 'border-royal bg-royal text-ink'
-                                  : 'border-white/15 text-bone/80 hover:border-white/35 hover:text-bone'
-                              }`}
-                            >
-                              {budget}
-                            </button>
-                          ))}
-                        </div>
-                      </fieldset>
-
-                      <div className="mt-7">
-                        <Field
-                          label="Tell us about the project"
-                          name="message"
-                          value={form.message}
-                          onChange={update}
-                          placeholder="A few lines about what you're building..."
-                          error={errors.message}
-                          required
-                          textarea
-                        />
-                      </div>
-
-                      <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                        <p className="max-w-[190px] font-mono text-[9px] uppercase leading-relaxed tracking-[0.14em] text-bone/70">
-                          No spam. No newsletters. Just a reply from a human.
-                        </p>
-                        <Magnetic strength={0.2}>
-                          <button
-                            type="submit"
-                            disabled={status === 'sending'}
-                            className="group inline-flex items-center gap-3 rounded-full bg-royal px-6 py-3.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-bone disabled:cursor-wait disabled:opacity-60"
+                      <div className="relative mt-7 flex-1">
+                        <AnimatePresence mode="wait" initial={false}>
+                          <motion.div
+                            key={step}
+                            initial={reduceMotion ? false : { opacity: 0, x: 24 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={reduceMotion ? undefined : { opacity: 0, x: -24 }}
+                            transition={{ duration: reduceMotion ? 0 : 0.28, ease: EASE }}
+                            role="group"
+                            aria-labelledby="contact-step-heading"
+                            className="min-h-[420px]"
                           >
-                            {status === 'sending' ? 'Sending...' : 'Send enquiry'}
-                            <ArrowUpRight
-                              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                              strokeWidth={2}
-                            />
+                            {step === 0 && (
+                              <>
+                                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-royal">
+                                  The brief
+                                </p>
+                                <h3
+                                  ref={stepHeadingRef}
+                                  id="contact-step-heading"
+                                  tabIndex={-1}
+                                  className="mt-2 font-heading text-3xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-4xl"
+                                >
+                                  What do you need?
+                                </h3>
+                                <p className="mt-3 max-w-md text-sm leading-relaxed text-bone/55">
+                                  Pick the closest fit. We can shape the exact scope together later.
+                                </p>
+
+                                <fieldset
+                                  className="mt-6"
+                                  aria-describedby={errors.service ? 'service-error' : undefined}
+                                >
+                                  <legend className="sr-only">Project type</legend>
+                                  <div className="grid gap-2 sm:grid-cols-2">
+                                    {services.map((service) => {
+                                      const Icon = service.icon
+                                      const selected = form.service === service.value
+                                      return (
+                                        <button
+                                          key={service.value}
+                                          type="button"
+                                          onClick={() => choose('service', service.value)}
+                                          aria-pressed={selected}
+                                          className={`group flex min-h-[118px] flex-col justify-between border p-3.5 text-left transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
+                                            selected
+                                              ? 'border-royal bg-royal/10'
+                                              : 'border-white/12 bg-white/[0.015] hover:border-white/30'
+                                          } ${service.wide ? 'sm:col-span-2' : ''}`}
+                                        >
+                                          <span className="flex w-full items-start justify-between">
+                                            <span
+                                              className={`grid h-8 w-8 place-items-center border transition-colors ${
+                                                selected
+                                                  ? 'border-royal/50 text-royal'
+                                                  : 'border-white/12 text-bone/48 group-hover:text-bone/70'
+                                              }`}
+                                            >
+                                              <Icon className="h-3.5 w-3.5" strokeWidth={1.5} />
+                                            </span>
+                                            <span
+                                              className={`grid h-4 w-4 place-items-center rounded-full border ${
+                                                selected ? 'border-royal bg-royal text-ink' : 'border-white/15'
+                                              }`}
+                                            >
+                                              {selected && <Check className="h-2.5 w-2.5" strokeWidth={3} />}
+                                            </span>
+                                          </span>
+                                          <span className="mt-3 block">
+                                            <span className="block text-[13px] font-medium leading-snug text-bone">
+                                              {service.value}
+                                            </span>
+                                            <span className="mt-1 block text-[11px] leading-snug text-bone/42">
+                                              {service.description}
+                                            </span>
+                                          </span>
+                                        </button>
+                                      )
+                                    })}
+                                  </div>
+                                </fieldset>
+                                {errors.service && (
+                                  <p
+                                    id="service-error"
+                                    role="alert"
+                                    className="mt-3 font-mono text-[9px] uppercase tracking-[0.12em] text-rust"
+                                  >
+                                    {errors.service}
+                                  </p>
+                                )}
+                              </>
+                            )}
+
+                            {step === 1 && (
+                              <>
+                                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-royal">
+                                  The shape
+                                </p>
+                                <h3
+                                  ref={stepHeadingRef}
+                                  id="contact-step-heading"
+                                  tabIndex={-1}
+                                  className="mt-2 font-heading text-3xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-4xl"
+                                >
+                                  Scope &amp; timing.
+                                </h3>
+                                <p className="mt-3 max-w-md text-sm leading-relaxed text-bone/55">
+                                  A rough range helps us suggest the right approach. Nothing is locked in.
+                                </p>
+
+                                <fieldset
+                                  className="mt-7"
+                                  aria-describedby={errors.budget ? 'budget-error' : undefined}
+                                >
+                                  <legend className="font-mono text-[10px] uppercase tracking-[0.18em] text-bone/55">
+                                    Budget range <span className="text-royal">*</span>
+                                  </legend>
+                                  <div className="mt-3 flex flex-wrap gap-2">
+                                    {budgets.map((budget) => (
+                                      <button
+                                        key={budget}
+                                        type="button"
+                                        onClick={() => choose('budget', budget)}
+                                        aria-pressed={form.budget === budget}
+                                        className={`border px-3 py-2.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
+                                          form.budget === budget
+                                            ? 'border-royal bg-royal text-ink'
+                                            : 'border-white/15 text-bone/72 hover:border-white/35 hover:text-bone'
+                                        }`}
+                                      >
+                                        {budget}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </fieldset>
+                                {errors.budget && (
+                                  <p
+                                    id="budget-error"
+                                    role="alert"
+                                    className="mt-3 font-mono text-[9px] uppercase tracking-[0.12em] text-rust"
+                                  >
+                                    {errors.budget}
+                                  </p>
+                                )}
+
+                                <fieldset
+                                  className="mt-7"
+                                  aria-describedby={errors.timeline ? 'timeline-error' : undefined}
+                                >
+                                  <legend className="font-mono text-[10px] uppercase tracking-[0.18em] text-bone/55">
+                                    Ideal timeline <span className="text-royal">*</span>
+                                  </legend>
+                                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                                    {timelines.map((timeline) => (
+                                      <button
+                                        key={timeline}
+                                        type="button"
+                                        onClick={() => choose('timeline', timeline)}
+                                        aria-pressed={form.timeline === timeline}
+                                        className={`flex items-center justify-between gap-3 border px-3 py-3 text-left font-mono text-[10px] uppercase tracking-[0.1em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
+                                          form.timeline === timeline
+                                            ? 'border-royal bg-royal/10 text-bone'
+                                            : 'border-white/12 text-bone/62 hover:border-white/30 hover:text-bone'
+                                        }`}
+                                      >
+                                        {timeline}
+                                        <span
+                                          className={`h-2 w-2 rounded-full ${
+                                            form.timeline === timeline ? 'bg-royal' : 'bg-white/10'
+                                          }`}
+                                        />
+                                      </button>
+                                    ))}
+                                  </div>
+                                </fieldset>
+                                {errors.timeline && (
+                                  <p
+                                    id="timeline-error"
+                                    role="alert"
+                                    className="mt-3 font-mono text-[9px] uppercase tracking-[0.12em] text-rust"
+                                  >
+                                    {errors.timeline}
+                                  </p>
+                                )}
+                              </>
+                            )}
+
+                            {step === 2 && (
+                              <>
+                                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-royal">
+                                  The details
+                                </p>
+                                <h3
+                                  ref={stepHeadingRef}
+                                  id="contact-step-heading"
+                                  tabIndex={-1}
+                                  className="mt-2 font-heading text-3xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-4xl"
+                                >
+                                  Bring us into the picture.
+                                </h3>
+                                <p className="mt-3 max-w-md text-sm leading-relaxed text-bone/55">
+                                  A few lines is enough. We&apos;ll ask anything else we need by email.
+                                </p>
+
+                                <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                                  <Field
+                                    label="Your name"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={update}
+                                    placeholder="Jane Smith"
+                                    error={errors.name}
+                                    required
+                                    autoComplete="name"
+                                  />
+                                  <Field
+                                    label="Email address"
+                                    name="email"
+                                    type="email"
+                                    value={form.email}
+                                    onChange={update}
+                                    placeholder="jane@company.com"
+                                    error={errors.email}
+                                    required
+                                    autoComplete="email"
+                                  />
+                                </div>
+
+                                <div className="mt-5">
+                                  <Field
+                                    label="Tell us about the project"
+                                    name="message"
+                                    value={form.message}
+                                    onChange={update}
+                                    placeholder="What are you building, and what should it achieve?"
+                                    error={errors.message}
+                                    required
+                                    textarea
+                                  />
+                                </div>
+
+                                <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+                                  <label htmlFor="field-website">Website</label>
+                                  <input
+                                    id="field-website"
+                                    name="website"
+                                    type="text"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    value={form.website}
+                                    onChange={update}
+                                  />
+                                </div>
+
+                                {submitError && (
+                                  <p
+                                    role="alert"
+                                    className="mt-5 border border-rust/30 bg-rust/10 p-3 text-sm leading-relaxed text-bone/80"
+                                  >
+                                    {submitError}
+                                  </p>
+                                )}
+                              </>
+                            )}
+                          </motion.div>
+                        </AnimatePresence>
+                      </div>
+
+                      <div className="mt-auto flex flex-col gap-4 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                        {step > 0 ? (
+                          <button
+                            type="button"
+                            onClick={goBack}
+                            className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-bone/55 transition-colors hover:text-bone"
+                          >
+                            <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
+                            Back
                           </button>
-                        </Magnetic>
+                        ) : (
+                          <p className="max-w-[190px] font-mono text-[9px] uppercase leading-relaxed tracking-[0.14em] text-bone/55">
+                            No spam. No newsletters. Just a reply from a human.
+                          </p>
+                        )}
+
+                        <button
+                          type={step === 2 ? 'submit' : 'button'}
+                          onClick={step === 2 ? undefined : goNext}
+                          disabled={status === 'sending'}
+                          className="group inline-flex items-center justify-center gap-3 rounded-full bg-royal px-6 py-3.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors hover:bg-bone disabled:cursor-wait disabled:opacity-60"
+                        >
+                          {status === 'sending' ? (
+                            <>
+                              Sending
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            </>
+                          ) : (
+                            <>
+                              {step === 2 ? 'Send enquiry' : 'Continue'}
+                              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                            </>
+                          )}
+                        </button>
                       </div>
                     </motion.form>
                   )}
