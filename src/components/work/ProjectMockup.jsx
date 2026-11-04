@@ -70,7 +70,7 @@ function ConsultingMockup({ project }) {
               A calm, considered digital home for teams navigating their next chapter.
             </p>
             <div className="mt-3 flex items-center gap-2">
-              <span className="rounded-full bg-[#11141a] px-2.5 py-1 font-mono text-[4.5px] uppercase tracking-[0.13em] text-[#e9e4da]">
+              <span data-live-tap className="rounded-full bg-[#11141a] px-2.5 py-1 font-mono text-[4.5px] uppercase tracking-[0.13em] text-[#e9e4da]">
                 Start a conversation
               </span>
               <span className="h-4 w-4 rounded-full border border-black/20" />
@@ -116,7 +116,7 @@ function ClinicMockup({ project }) {
         <div className="flex items-center gap-2.5 font-mono text-[5px] uppercase tracking-[0.13em] text-[#10231c]/55">
           <span className="hidden sm:block">Treatments</span>
           <span className="hidden sm:block">Team</span>
-          <span className="rounded-full px-2 py-1 font-semibold text-[#06130e]" style={{ backgroundColor: project.accent }}>
+          <span data-live-tap className="rounded-full px-2 py-1 font-semibold text-[#06130e]" style={{ backgroundColor: project.accent }}>
             Book a visit
           </span>
         </div>
@@ -245,6 +245,7 @@ function StoreMockup({ project }) {
               <span className="text-[#2a2119]">Ksh 4,800</span>
             </span>
             <span
+              data-live-tap
               className="grid h-5 w-5 place-items-center rounded-full text-[7px] text-[#2a2119]"
               style={{ backgroundColor: project.accent }}
             >
@@ -290,7 +291,7 @@ function MarketplaceMockup({ project }) {
             to move.
           </p>
           <div className="mt-3 flex items-center gap-2">
-            <span className="bg-[#f6f1e8] px-2.5 py-1 font-mono text-[4.5px] font-bold uppercase tracking-[0.12em] text-[#0b0d12]">
+            <span data-live-tap className="bg-[#f6f1e8] px-2.5 py-1 font-mono text-[4.5px] font-bold uppercase tracking-[0.12em] text-[#0b0d12]">
               Shop the drop
             </span>
             <span className="font-mono text-[4.5px] uppercase tracking-[0.12em] text-white/40">Limited run</span>
@@ -380,7 +381,7 @@ function DashboardMockup({ project }) {
               <p className="font-mono text-[4px] uppercase tracking-[0.1em] text-white/32">{item.label}</p>
               <p className="mt-1 font-heading text-[clamp(.7rem,1.5vw,1.45rem)] font-semibold leading-none">{item.value}</p>
               <div className="mt-1.5 h-[2px] w-full bg-white/8">
-                <div className="h-full w-2/3" style={{ backgroundColor: project.accent }} />
+                <div data-live-bar className="h-full w-2/3" style={{ backgroundColor: project.accent, transformOrigin: 'left center' }} />
               </div>
             </div>
           ))}
@@ -433,6 +434,54 @@ function DashboardMockup({ project }) {
 }
 
 function BookingMockup({ project }) {
+  const week = [
+    {
+      day: 'Mon',
+      date: '23',
+      events: [
+        { slot: 0, time: '09:00', name: 'Amina K.', tone: 'light' },
+        { slot: 1, time: '11:30', name: 'Zuri M.', tone: 'accent' },
+      ],
+    },
+    {
+      day: 'Tue',
+      date: '24',
+      events: [
+        { slot: 0, time: '10:30', name: 'Noah W.', tone: 'dark' },
+        { slot: 2, time: '16:00', name: 'Maya K.', tone: 'soft' },
+      ],
+    },
+    {
+      day: 'Wed',
+      date: '25',
+      events: [
+        { slot: 0, time: '10:30', name: 'Amara K.', tone: 'accent' },
+        { slot: 1, time: '13:30', name: 'Priya S.', tone: 'soft' },
+      ],
+    },
+    {
+      day: 'Thu',
+      date: '26',
+      events: [
+        { slot: 1, time: '11:30', name: 'Tobi A.', tone: 'light' },
+        { slot: 2, time: '15:30', name: 'Joel N.', tone: 'dark' },
+      ],
+    },
+    {
+      day: 'Fri',
+      date: '27',
+      events: [
+        { slot: 0, time: '09:30', name: 'Wanjiru M.', tone: 'soft' },
+        { slot: 2, time: '14:30', name: 'Sam O.', tone: 'accent' },
+      ],
+    },
+  ]
+
+  const stats = [
+    { label: 'Clients', value: '24', note: '4 active', bars: [38, 52, 46, 68, 82] },
+    { label: 'Revenue', value: 'Ksh 84k', note: '+12%', bars: [30, 44, 40, 58, 76] },
+  ]
+
   return (
     <div className="flex h-full flex-col bg-[#f1edff] text-[#211b35]">
       <header className="flex items-center justify-between border-b border-[#211b35]/10 px-3 py-2">
@@ -443,11 +492,11 @@ function BookingMockup({ project }) {
         <div className="flex items-center gap-2.5 font-mono text-[5px] uppercase tracking-[0.13em] text-[#211b35]/45">
           <span className="hidden sm:block">Calendar</span>
           <span className="hidden sm:block">Clients</span>
-          <span className="rounded-full bg-[#211b35] px-2 py-1 text-white">New booking</span>
+          <span data-live-tap className="rounded-full bg-[#211b35] px-2 py-1 text-white">New booking</span>
         </div>
       </header>
       <div className="grid min-h-0 flex-1 grid-cols-[1.15fr_.85fr] gap-2 p-2 sm:gap-3 sm:p-3">
-        <div className="border border-[#211b35]/10 bg-white/60 p-2">
+        <div className="flex min-h-0 flex-col border border-[#211b35]/10 bg-white/60 p-2">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-mono text-[4.5px] uppercase tracking-[0.12em] text-[#211b35]/35">This week</p>
@@ -458,28 +507,63 @@ function BookingMockup({ project }) {
               <span className="grid h-4 w-4 place-items-center border border-[#211b35]/10 font-mono text-[5px]">&gt;</span>
             </div>
           </div>
-          <div className="mt-2 grid grid-cols-5 gap-1">
-            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, index) => (
-              <div key={day} className="text-center">
-                <span className="font-mono text-[4px] uppercase tracking-[0.1em] text-[#211b35]/35">{day}</span>
-                <div className="mt-1 space-y-1">
-                  {[0, 1, 2].map((slot) => (
-                    <span
-                      key={slot}
-                      className={`block h-3 border ${
-                        index === 2 && slot === 1
+          <div className="mt-2 grid min-h-0 flex-1 grid-cols-5 gap-1">
+            {week.map(({ day, date, events }, dayIndex) => (
+              <div key={day} className="flex min-h-0 flex-col">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[3.5px] uppercase tracking-[0.08em] text-[#211b35]/35">{day}</span>
+                  <span
+                    className={`grid h-3 w-3 place-items-center rounded-full font-mono text-[3.5px] ${
+                      dayIndex === 2 ? 'text-[#211b35]' : 'text-[#211b35]/40'
+                    }`}
+                    style={dayIndex === 2 ? { backgroundColor: `${project.accent}55` } : undefined}
+                  >
+                    {date}
+                  </span>
+                </div>
+                <div className="mt-1 flex min-h-0 flex-1 flex-col gap-1">
+                  {[0, 1, 2].map((slot) => {
+                    const event = events.find((item) => item.slot === slot)
+
+                    if (!event) {
+                      return (
+                        <span
+                          key={slot}
+                          className="flex min-h-0 flex-1 items-center justify-center border border-dashed border-[#211b35]/8 bg-white/30 font-mono text-[4px] text-[#211b35]/16"
+                        >
+                          +
+                        </span>
+                      )
+                    }
+
+                    const toneClass =
+                      event.tone === 'dark'
+                        ? 'border-transparent bg-[#211b35] text-white'
+                        : event.tone === 'accent'
                           ? 'border-transparent text-[#211b35]'
-                          : 'border-[#211b35]/8 bg-white/70'
-                      }`}
-                      style={index === 2 && slot === 1 ? { backgroundColor: project.accent } : undefined}
-                    />
-                  ))}
+                          : event.tone === 'soft'
+                            ? 'border-[#211b35]/8 bg-[#211b35]/[0.055] text-[#211b35]'
+                            : 'border-[#211b35]/8 bg-white/85 text-[#211b35]'
+
+                    return (
+                      <div
+                        key={slot}
+                        className={`flex min-h-0 flex-1 flex-col justify-between border p-1 ${toneClass}`}
+                        style={event.tone === 'accent' ? { backgroundColor: project.accent } : undefined}
+                      >
+                        <span className={`font-mono text-[3.5px] uppercase tracking-[0.06em] ${event.tone === 'dark' ? 'text-white/45' : 'text-[#211b35]/40'}`}>
+                          {event.time}
+                        </span>
+                        <span className="truncate font-heading text-[4.5px] font-semibold leading-tight tracking-[-0.02em]">{event.name}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex min-h-0 flex-col gap-2">
           <div className="border border-[#211b35]/10 bg-white/70 p-2">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[4.5px] uppercase tracking-[0.12em] text-[#211b35]/35">Next up</span>
@@ -489,20 +573,52 @@ function BookingMockup({ project }) {
               Studio session
             </p>
             <p className="mt-0.5 font-mono text-[4px] uppercase tracking-[0.1em] text-[#211b35]/35">
-              Room 02 / 60 min
+              Amara K. / Room 02 / 60 min
             </p>
           </div>
-          <div className="grid flex-1 grid-cols-2 gap-1">
-            {['09:00', '10:30', '13:00', '15:30'].map((time, index) => (
-              <span
-                key={time}
-                className={`grid place-items-center border font-mono text-[4px] tracking-[0.1em] ${
-                  index === 1 ? 'border-transparent text-[#211b35]' : 'border-[#211b35]/10 text-[#211b35]/40'
-                }`}
-                style={index === 1 ? { backgroundColor: `${project.accent}99` } : undefined}
-              >
-                {time}
-              </span>
+          <div className="border border-[#211b35]/10 bg-white/50 p-2">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[4.5px] uppercase tracking-[0.12em] text-[#211b35]/35">Open times</span>
+              <span className="font-mono text-[4px] uppercase tracking-[0.1em]" style={{ color: project.accent }}>Add</span>
+            </div>
+            <div className="mt-1.5 grid grid-cols-3 gap-1">
+              {['13:00', '15:30', '17:00'].map((time, index) => (
+                <span
+                  key={time}
+                  className={`grid place-items-center py-1 font-mono text-[4px] tracking-[0.06em] ${
+                    index === 0 ? 'text-[#211b35]' : 'border border-[#211b35]/8 text-[#211b35]/40'
+                  }`}
+                  style={index === 0 ? { backgroundColor: `${project.accent}44` } : undefined}
+                >
+                  {time}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="grid min-h-0 flex-1 grid-cols-2 gap-1">
+            {stats.map((stat, index) => (
+              <div key={stat.label} className="flex min-h-0 flex-col justify-between bg-[#211b35] p-1.5 text-white">
+                <div className="flex items-center justify-between font-mono text-[4px] uppercase tracking-[0.08em] text-white/40">
+                  <span>{stat.label}</span>
+                  <span
+                    className={`h-1 w-1 rounded-full ${index === 0 ? 'bg-emerald-400/70' : ''}`}
+                    style={index === 0 ? undefined : { backgroundColor: project.accent }}
+                  />
+                </div>
+                <div>
+                  <p className="font-heading text-[8px] font-semibold leading-none tracking-[-0.03em]">{stat.value}</p>
+                  <p className="mt-0.5 font-mono text-[3.5px] uppercase tracking-[0.06em] text-white/40">{stat.note}</p>
+                </div>
+                <div className="flex h-[18px] items-end gap-[2px]">
+                  {stat.bars.map((height, barIndex) => (
+                    <span
+                      key={barIndex}
+                      className="flex-1"
+                      style={{ height: `${height}%`, backgroundColor: barIndex > 2 ? project.accent : 'rgba(255,255,255,.14)' }}
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -605,7 +721,7 @@ function LaunchMockup({ project }) {
             One calm view of every account, payment and decision that matters.
           </p>
           <div className="mt-3 flex items-center gap-2">
-            <span className="rounded-full px-2.5 py-1 font-mono text-[4.5px] font-semibold uppercase tracking-[0.12em] text-[#07110f]" style={{ backgroundColor: project.accent }}>
+            <span data-live-tap className="rounded-full px-2.5 py-1 font-mono text-[4.5px] font-semibold uppercase tracking-[0.12em] text-[#07110f]" style={{ backgroundColor: project.accent }}>
               Join the waitlist
             </span>
             <span className="font-mono text-[4.5px] uppercase tracking-[0.12em] text-white/35">See how it works</span>
@@ -697,7 +813,9 @@ export default function ProjectMockup({ project, className = '', compact = false
       />
       <BrowserBar project={projectWithAccent} compact={compact} />
       <div className="relative min-h-0 flex-1 overflow-hidden">
-        <Layout project={projectWithAccent} />
+        <div className="mock-surface h-full w-full" style={{ transformOrigin: 'center' }}>
+          <Layout project={projectWithAccent} />
+        </div>
       </div>
     </div>
   )
