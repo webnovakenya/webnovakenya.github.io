@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+import { Float } from '@react-three/drei'
 import { ACESFilmicToneMapping, AdditiveBlending, Color, MathUtils } from 'three'
 import HeroFallback from './HeroFallback'
 
@@ -41,16 +42,18 @@ const orbFragment = /* glsl */ `
     float fill = clamp(dot(normal, fillLight), 0.0, 1.0);
     float top = smoothstep(-0.25, 0.92, normal.y);
     float lower = 1.0 - smoothstep(-0.88, 0.02, normal.y);
-    float spec = pow(clamp(dot(normal, halfVector), 0.0, 1.0), 72.0);
-    float broad = pow(key, 7.0);
-    float band = 0.5 + 0.5 * sin((vUv.y + 0.08 * sin(vUv.x * 17.0)) * 34.0 + uTime * 0.35);
-    band = smoothstep(0.55, 1.0, band) * 0.035;
+    float spec = pow(clamp(dot(normal, halfVector), 0.0, 1.0), 110.0);
+    float broad = pow(key, 6.0);
+    float band = 0.5 + 0.5 * sin((vUv.y + 0.08 * sin(vUv.x * 17.0)) * 30.0 + uTime * 0.28);
+    band = smoothstep(0.58, 1.0, band) * 0.03;
+    float brushed = smoothstep(0.74, 1.0, sin(vUv.y * 230.0 + sin(vUv.x * 20.0)) * 0.5 + 0.5);
 
-    vec3 base = mix(uDeep, uSilver, clamp(top * 0.82 + key * 0.28, 0.0, 1.0));
-    base = mix(base, uCobalt * 0.8, lower * 0.74 + fresnel * 0.16);
-    base += uCobalt * fresnel * 1.3;
-    base += vec3(1.0, 0.94, 0.84) * (spec * 1.08 + broad * 0.16);
+    vec3 base = mix(uDeep, uSilver, clamp(top * 0.76 + key * 0.3, 0.0, 1.0));
+    base = mix(base, uCobalt * 0.68, lower * 0.78 + fresnel * 0.2);
+    base += uCobalt * fresnel * 1.22;
+    base += vec3(1.0, 0.95, 0.86) * (spec * 0.92 + broad * 0.12);
     base += uCobalt * band;
+    base += vec3(0.06, 0.07, 0.1) * brushed * 0.28;
     base += vec3(0.025, 0.04, 0.085) * fill * 0.7;
 
     gl_FragColor = vec4(base, 1.0);
@@ -71,7 +74,7 @@ function OrbitRings() {
       <mesh rotation={[Math.PI / 2.15, 0.12, 0.28]}>
         <torusGeometry args={[1.56, 0.0032, 3, 168]} />
         <meshBasicMaterial
-          color="#dce4ff"
+          color="#e5ecff"
           transparent
           opacity={0.42}
           depthWrite={false}
@@ -82,7 +85,7 @@ function OrbitRings() {
       <mesh rotation={[Math.PI / 2.7, -0.32, -0.5]}>
         <torusGeometry args={[1.78, 0.0024, 3, 168]} />
         <meshBasicMaterial
-          color="#4f6fff"
+          color="#5b78ff"
           transparent
           opacity={0.5}
           depthWrite={false}
@@ -94,11 +97,22 @@ function OrbitRings() {
   )
 }
 
+function ChromeShard({ position, scale, rotation, speed = 1.4, color = '#dfe5f2', geometry = 'octa' }) {
+  return (
+    <Float speed={speed} rotationIntensity={1.2} floatIntensity={1.4}>
+      <mesh position={position} scale={scale} rotation={rotation}>
+        {geometry === 'octa' ? <octahedronGeometry args={[1, 0]} /> : <tetrahedronGeometry args={[1, 0]} />}
+        <meshStandardMaterial color={color} metalness={0.94} roughness={0.16} />
+      </mesh>
+    </Float>
+  )
+}
+
 function Dust({ pointer }) {
   const ref = useRef(null)
   const positions = useMemo(() => {
-    const values = new Float32Array(180 * 3)
-    for (let index = 0; index < 180; index += 1) {
+    const values = new Float32Array(150 * 3)
+    for (let index = 0; index < 150; index += 1) {
       const radius = 1.5 + Math.random() * 1.5
       const theta = Math.random() * Math.PI * 2
       const phi = Math.acos(2 * Math.random() - 1)
@@ -123,7 +137,7 @@ function Dust({ pointer }) {
       </bufferGeometry>
       <pointsMaterial
         size={0.018}
-        color="#aebfff"
+        color="#b6c5ff"
         transparent
         opacity={0.62}
         sizeAttenuation
@@ -140,9 +154,9 @@ function Orb({ pointer }) {
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uSilver: { value: new Color('#e1ddd3') },
-      uCobalt: { value: new Color('#4f6fff') },
-      uDeep: { value: new Color('#101832') },
+      uSilver: { value: new Color('#e8e3d9') },
+      uCobalt: { value: new Color('#5b78ff') },
+      uDeep: { value: new Color('#0d1529') },
     }),
     [],
   )
@@ -183,6 +197,40 @@ function Orb({ pointer }) {
       </mesh>
       <OrbitRings />
       <Dust pointer={pointer} />
+
+      <ambientLight intensity={0.7} />
+      <directionalLight position={[4, 5, 4]} intensity={2.4} color="#fff8ed" />
+      <pointLight position={[-3, 1, 3]} intensity={24} distance={9} color="#5b78ff" />
+      <pointLight position={[3.4, -2.2, 2]} intensity={14} distance={8} color="#ff7b55" />
+
+      <ChromeShard
+        position={[1.6, 0.78, 0.55]}
+        scale={0.13}
+        rotation={[0.4, 0.2, 0.5]}
+        speed={1.7}
+      />
+      <ChromeShard
+        position={[-1.5, -0.95, 0.62]}
+        scale={0.1}
+        rotation={[0.8, 0.4, 0.2]}
+        speed={1.2}
+        geometry="tetra"
+        color="#f3e7d3"
+      />
+      <ChromeShard
+        position={[1.05, -1.2, 0.4]}
+        scale={0.065}
+        rotation={[0.2, 0.9, 0.4]}
+        speed={2}
+        geometry="tetra"
+        color="#ccd5ee"
+      />
+      <ChromeShard
+        position={[-1.7, 1.05, 0.2]}
+        scale={0.07}
+        rotation={[0.5, 0.3, 0.9]}
+        speed={1.5}
+      />
     </group>
   )
 }
@@ -230,7 +278,7 @@ export default function HeroOrb({ className = '' }) {
       className={`pointer-events-none relative h-full w-full ${className}`}
       aria-hidden="true"
     >
-      <div className="absolute inset-[4%] rounded-full bg-[radial-gradient(circle,rgba(79,111,255,0.26)_0%,rgba(79,111,255,0.09)_38%,transparent_70%)]" />
+      <div className="absolute inset-[4%] rounded-full bg-[radial-gradient(circle,rgba(91,120,255,0.26)_0%,rgba(91,120,255,0.09)_38%,transparent_70%)]" />
       <Canvas
         className="!absolute inset-0"
         frameloop={inView && pageVisible ? 'always' : 'never'}

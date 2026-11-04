@@ -82,12 +82,12 @@ function Field({ label, name, type = 'text', value, onChange, placeholder, error
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
-        <label htmlFor={id} className="font-mono text-[11px] uppercase tracking-[0.2em] text-bone/75">
+        <label htmlFor={id} className="font-mono text-[10px] uppercase tracking-[0.16em] text-bone/78">
           {label}
           {required && <span className="ml-1 text-royal">*</span>}
         </label>
         {error && (
-          <span id={errorId} role="alert" className="font-mono text-[9px] uppercase tracking-[0.12em] text-rust">
+          <span id={errorId} role="alert" className="font-mono text-[10px] uppercase tracking-[0.1em] text-rust">
             {error}
           </span>
         )}
@@ -302,69 +302,74 @@ export default function Contact() {
   const progress = status === 'sent' ? 3 : step + 1
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-ink py-24 text-bone sm:py-32">
+    <section id="contact" className="relative overflow-hidden bg-paper py-24 text-ink sm:py-32 lg:py-40">
       <span
-        className="pointer-events-none absolute -bottom-8 left-0 hidden select-none font-display text-[21vw] font-extrabold leading-none tracking-[-0.07em] text-white/[0.013] lg:block"
+        className="pointer-events-none absolute -bottom-10 left-0 hidden select-none font-display text-[19vw] font-bold uppercase leading-none tracking-[-0.07em] text-ink/[0.028] lg:block"
         aria-hidden="true"
       >
-        LET&apos;S TALK
+        Let&apos;s talk
       </span>
+      <div className="pointer-events-none absolute inset-0 paper-grid" aria-hidden="true" />
       <div
-        className="animate-drift pointer-events-none absolute -inset-[8%]"
-        style={{
-          background:
-            'radial-gradient(ellipse 50% 55% at 20% 20%, rgba(79,111,255,0.1), transparent 60%), radial-gradient(ellipse 45% 45% at 90% 80%, rgba(108,92,255,0.08), transparent 60%)',
-        }}
+        className="pointer-events-none absolute -right-40 top-1/4 h-[34rem] w-[34rem] rounded-full bg-royal/[0.07] blur-[130px]"
         aria-hidden="true"
       />
-      <div className="noise pointer-events-none absolute inset-0" aria-hidden="true" />
 
-      <div className="relative mx-auto w-full max-w-[1680px] px-4 sm:px-8">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5">
+      <div className="section-frame relative">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-ink/15 pb-5">
+          <Eyebrow index="05" onLight>
+            Contact
+          </Eyebrow>
+          <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/60">
+            <span className="h-1.5 w-1.5 rounded-full bg-royal" />
+            Open for select projects
+          </span>
+        </div>
+
+        <div className="mt-14 grid gap-14 sm:mt-20 lg:grid-cols-12 lg:gap-10">
+          <div className="min-w-0 lg:col-span-5">
             <Reveal>
-              <Eyebrow index="06">Contact</Eyebrow>
               <SplitHeading
                 lines={["Let's make", 'something', 'remarkable.']}
                 lineClassNames={['', '', 'text-rust']}
-                className="mt-6 font-heading text-[clamp(2.8rem,5.5vw,5.5rem)] font-semibold leading-[0.94] tracking-[-0.055em]"
+                className="font-display text-[clamp(2.45rem,4.4vw,4.6rem)] font-bold uppercase leading-[0.9] tracking-[-0.05em]"
               />
-              <p className="mt-6 max-w-sm text-base leading-relaxed text-bone/70 sm:text-base">
+              <p className="mt-7 max-w-sm text-[15px] leading-[1.8] text-ink/70 sm:text-base">
                 Tell us what you&apos;re building, where you want to take it and what&apos;s getting in
                 the way. We&apos;ll come back with a considered response — not a sales pitch.
               </p>
 
-              <div className="mt-10 border-t border-white/10 pt-6">
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/72">
+              <div className="mt-10 border-t border-ink/15 pt-6">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/55">
                   Prefer email?
                 </p>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="link-line mt-3 flex w-fit items-center gap-2 font-heading text-xl font-semibold tracking-[-0.02em] text-bone transition-colors hover:text-royal sm:text-2xl"
+                  className="link-line mt-3 flex w-fit items-center gap-2 font-heading text-xl font-semibold tracking-[-0.02em] text-ink transition-colors hover:text-royal sm:text-2xl"
                 >
                   {CONTACT_EMAIL}
                   <ArrowUpRight className="h-4 w-4" strokeWidth={1.5} />
                 </a>
                 <a
                   href="tel:+254718885175"
-                  className="link-line mt-4 flex w-fit items-center gap-2 font-mono text-sm uppercase tracking-[0.12em] text-bone/72 transition-colors hover:text-royal"
+                  className="link-line mt-4 flex w-fit items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-ink/60 transition-colors hover:text-royal"
                 >
-                  +254 718885175
+                  +254 718 885 175
                   <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={1.5} />
                 </a>
               </div>
 
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[11px] uppercase tracking-[0.18em] text-bone/72">
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[9px] uppercase tracking-[0.15em] text-ink/55">
                 <span className="flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-royal" />
                   Open for enquiries
                 </span>
-                <span>Worldwide services</span>
-                <span>Replies within 24h</span>
+                <span>Nairobi / Worldwide</span>
+                <span>Reply within 24h</span>
               </div>
 
               <div className="mt-10">
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/70">Elsewhere</p>
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink/55">Elsewhere</p>
                 <div className="mt-4 flex gap-2">
                   {socials.map((social) => {
                     const Icon = social.icon
@@ -375,7 +380,7 @@ export default function Contact() {
                         target="_blank"
                         rel="noreferrer"
                         aria-label={social.label}
-                        className="grid h-10 w-10 place-items-center rounded-full border border-white/15 text-bone/72 transition-colors hover:border-royal hover:text-royal"
+                        className="grid h-10 w-10 place-items-center rounded-full border border-ink/20 text-ink/62 transition-colors hover:border-royal hover:text-royal"
                       >
                         <Icon className="h-4 w-4" strokeWidth={1.5} />
                       </a>
@@ -386,9 +391,13 @@ export default function Contact() {
             </Reveal>
           </div>
 
-          <div id="project-enquiry" className="scroll-mt-24 lg:col-span-6 lg:col-start-7">
+          <div id="project-enquiry" className="min-w-0 scroll-mt-28 lg:col-span-6 lg:col-start-7">
             <Reveal delay={0.1}>
-              <div className="relative border border-white/10 bg-white/[0.02] p-5 sm:p-8">
+              <div className="relative overflow-hidden rounded-[1.6rem] border border-ink/20 bg-ink p-5 text-bone shadow-[0_35px_90px_rgba(8,10,15,0.24)] sm:p-8">
+                <div
+                  className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-royal/16 blur-[90px]"
+                  aria-hidden="true"
+                />
                 <AnimatePresence mode="wait" initial={false}>
                   {status === 'sent' ? (
                     <motion.div
@@ -418,7 +427,7 @@ export default function Contact() {
                         <h3
                           ref={successHeadingRef}
                           tabIndex={-1}
-                          className="mt-16 font-heading text-4xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-5xl"
+                          className="mt-16 font-display text-4xl font-bold uppercase leading-[0.92] tracking-[-0.04em] outline-none sm:text-5xl"
                         >
                           Thank you,
                           <br />
@@ -482,10 +491,10 @@ export default function Contact() {
                       transition={{ duration: reduceMotion ? 0 : 0.35 }}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/72">
-                          Start a project
+                        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-bone/72">
+                          Project enquiry
                         </span>
-                        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-bone/35">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-bone/42">
                           Step {step + 1} of 3
                         </span>
                       </div>
@@ -505,9 +514,9 @@ export default function Contact() {
                         />
                       </div>
 
-                      <div className="mt-2 flex justify-between font-mono text-[8px] uppercase tracking-[0.15em] text-bone/30">
+                      <div className="mt-2.5 flex justify-between font-mono text-[9px] uppercase tracking-[0.13em] text-bone/32">
                         {steps.map((label, index) => (
-                          <span key={label} className={index <= step ? 'text-bone/65' : ''}>
+                          <span key={label} className={index <= step ? 'text-bone/72' : ''}>
                             {label}
                           </span>
                         ))}
@@ -527,18 +536,18 @@ export default function Contact() {
                           >
                             {step === 0 && (
                               <>
-                                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-royal">
+                                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-royal">
                                   The brief
                                 </p>
                                 <h3
                                   ref={stepHeadingRef}
                                   id="contact-step-heading"
                                   tabIndex={-1}
-                                  className="mt-2 font-heading text-3xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-4xl"
+                                  className="mt-2 font-display text-[clamp(1.8rem,2.6vw,2.4rem)] font-bold uppercase leading-[0.94] tracking-[-0.04em] outline-none"
                                 >
                                   What do you need?
                                 </h3>
-                                <p className="mt-3 max-w-md text-sm leading-relaxed text-bone/55">
+                                <p className="mt-3 max-w-md text-[13.5px] leading-[1.7] text-bone/64">
                                   Pick the closest fit. We can shape the exact scope together later.
                                 </p>
 
@@ -557,15 +566,15 @@ export default function Contact() {
                                           type="button"
                                           onClick={() => choose('service', service.value)}
                                           aria-pressed={selected}
-                                          className={`group flex min-h-[118px] flex-col justify-between border p-3.5 text-left transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
+                                          className={`group flex min-h-[124px] flex-col justify-between rounded-xl border p-4 text-left transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
                                             selected
-                                              ? 'border-royal bg-royal/10'
-                                              : 'border-white/12 bg-white/[0.015] hover:border-white/30'
+                                              ? 'border-royal bg-royal/12'
+                                              : 'border-white/12 bg-white/[0.02] hover:border-white/30'
                                           } ${service.wide ? 'sm:col-span-2' : ''}`}
                                         >
                                           <span className="flex w-full items-start justify-between">
                                             <span
-                                              className={`grid h-8 w-8 place-items-center border transition-colors ${
+                                              className={`grid h-8 w-8 place-items-center rounded-lg border transition-colors ${
                                                 selected
                                                   ? 'border-royal/50 text-royal'
                                                   : 'border-white/12 text-bone/48 group-hover:text-bone/70'
@@ -582,10 +591,10 @@ export default function Contact() {
                                             </span>
                                           </span>
                                           <span className="mt-3 block">
-                                            <span className="block text-[13px] font-medium leading-snug text-bone">
+                                            <span className="block text-[13.5px] font-medium leading-snug text-bone">
                                               {service.value}
                                             </span>
-                                            <span className="mt-1 block text-[11px] leading-snug text-bone/42">
+                                            <span className="mt-1 block text-[11.5px] leading-[1.55] text-bone/55">
                                               {service.description}
                                             </span>
                                           </span>
@@ -608,18 +617,18 @@ export default function Contact() {
 
                             {step === 1 && (
                               <>
-                                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-royal">
+                                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-royal">
                                   The shape
                                 </p>
                                 <h3
                                   ref={stepHeadingRef}
                                   id="contact-step-heading"
                                   tabIndex={-1}
-                                  className="mt-2 font-heading text-3xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-4xl"
+                                  className="mt-2 font-display text-[clamp(1.8rem,2.6vw,2.4rem)] font-bold uppercase leading-[0.94] tracking-[-0.04em] outline-none"
                                 >
                                   Scope &amp; timing.
                                 </h3>
-                                <p className="mt-3 max-w-md text-sm leading-relaxed text-bone/55">
+                                <p className="mt-3 max-w-md text-[13.5px] leading-[1.7] text-bone/64">
                                   A rough range helps us suggest the right approach. Nothing is locked in.
                                 </p>
 
@@ -637,7 +646,7 @@ export default function Contact() {
                                         type="button"
                                         onClick={() => choose('budget', budget)}
                                         aria-pressed={form.budget === budget}
-                                        className={`border px-3 py-2.5 font-mono text-[10px] uppercase tracking-[0.1em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
+                                        className={`rounded-full border px-3.5 py-2.5 font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
                                           form.budget === budget
                                             ? 'border-royal bg-royal text-ink'
                                             : 'border-white/15 text-bone/72 hover:border-white/35 hover:text-bone'
@@ -672,7 +681,7 @@ export default function Contact() {
                                         type="button"
                                         onClick={() => choose('timeline', timeline)}
                                         aria-pressed={form.timeline === timeline}
-                                        className={`flex items-center justify-between gap-3 border px-3 py-3 text-left font-mono text-[10px] uppercase tracking-[0.1em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
+                                        className={`flex items-center justify-between gap-3 rounded-xl border px-3.5 py-3 text-left font-mono text-[10px] uppercase tracking-[0.08em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal ${
                                           form.timeline === timeline
                                             ? 'border-royal bg-royal/10 text-bone'
                                             : 'border-white/12 text-bone/62 hover:border-white/30 hover:text-bone'
@@ -702,18 +711,18 @@ export default function Contact() {
 
                             {step === 2 && (
                               <>
-                                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-royal">
+                                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-royal">
                                   The details
                                 </p>
                                 <h3
                                   ref={stepHeadingRef}
                                   id="contact-step-heading"
                                   tabIndex={-1}
-                                  className="mt-2 font-heading text-3xl font-semibold leading-tight tracking-[-0.04em] outline-none sm:text-4xl"
+                                  className="mt-2 font-display text-[clamp(1.8rem,2.6vw,2.4rem)] font-bold uppercase leading-[0.94] tracking-[-0.04em] outline-none"
                                 >
                                   Bring us into the picture.
                                 </h3>
-                                <p className="mt-3 max-w-md text-sm leading-relaxed text-bone/55">
+                                <p className="mt-3 max-w-md text-[13.5px] leading-[1.7] text-bone/64">
                                   A few lines is enough. We&apos;ll ask anything else we need by email.
                                 </p>
 
@@ -793,7 +802,7 @@ export default function Contact() {
                           </button>
                         ) : (
                           <p className="max-w-[190px] font-mono text-[9px] uppercase leading-relaxed tracking-[0.14em] text-bone/55">
-                            No spam. No newsletters. Just a reply from a human.
+                             No spam. No newsletters. Just a considered reply from a human.
                           </p>
                         )}
 

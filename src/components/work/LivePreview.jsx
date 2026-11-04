@@ -23,9 +23,9 @@ export default function LivePreview({ project, children, active = false, reduced
         defaults: { ease: 'power2.inOut' },
       })
 
-      timeline.set(cursor, { xPercent: 0, yPercent: 0, opacity: 0 }, 0)
-      timeline.set(bars, { scaleY: 0, transformOrigin: 'bottom' }, 0)
-      timeline.set(taps, { scale: 1, transformOrigin: 'center' }, 0)
+      if (cursor) timeline.set(cursor, { xPercent: 0, yPercent: 0, opacity: 0 }, 0)
+      if (bars.length) timeline.set(bars, { scaleY: 0, transformOrigin: 'bottom' }, 0)
+      if (taps.length) timeline.set(taps, { scale: 1, transformOrigin: 'center' }, 0)
 
       if (page) {
         timeline.set(page, { scale: 1.028, yPercent: 0 }, 0)

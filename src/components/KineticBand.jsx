@@ -48,40 +48,43 @@ export default function KineticBand() {
       data-section="approach"
       className="relative overflow-hidden bg-ink text-bone"
     >
-      <div className="relative flex min-h-screen flex-col justify-between overflow-hidden py-20 sm:py-24">
+      <div className="relative flex min-h-[88svh] flex-col justify-between overflow-hidden py-20 sm:py-24">
+        <div className="pointer-events-none absolute inset-0 dark-grid opacity-45" aria-hidden="true" />
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 55% 50% at 72% 28%, rgba(79,111,255,0.13), transparent 62%), radial-gradient(ellipse 40% 45% at 12% 78%, rgba(108,92,255,0.09), transparent 65%)',
+              'radial-gradient(ellipse 55% 50% at 72% 28%, rgba(91,120,255,0.14), transparent 62%), radial-gradient(ellipse 40% 45% at 12% 78%, rgba(140,123,255,0.09), transparent 65%)',
           }}
           aria-hidden="true"
         />
         <div className="noise pointer-events-none absolute inset-0" aria-hidden="true" />
 
-        <div className="relative z-10 mx-auto w-full max-w-[1680px] px-4 sm:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-bone/70">
+        <div className="section-frame relative z-10">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/12 pb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/55">
             <span className="flex items-center gap-3">
               <Asterisk className="h-3 w-3 text-rust" strokeWidth={1.5} />
-              Our approach
+              The approach
             </span>
             <span className="hidden sm:inline">One studio / every discipline</span>
             <span className="hidden lg:inline">Scroll to move</span>
           </div>
         </div>
 
-        <div className="relative z-10 mt-12 hidden overflow-hidden lg:block">
+        <div className="relative z-10 mt-10 hidden overflow-hidden lg:block">
           <div
             ref={trackRef}
-            className="flex w-max items-center gap-8 pl-4 will-change-transform sm:pl-8 xl:gap-12"
+            className="flex w-max items-center gap-8 pl-10 will-change-transform xl:gap-12"
           >
             {[...disciplines, ...disciplines].map((discipline, index) => (
               <div key={`${discipline}-${index}`} className="flex items-center gap-8 xl:gap-12">
                 <span
-                  className={`font-heading text-[clamp(4.5rem,9vw,9rem)] font-semibold uppercase leading-none tracking-[-0.055em] ${
+                  className={`font-display text-[clamp(5rem,10vw,10rem)] font-bold uppercase leading-[0.82] tracking-[-0.06em] ${
                     index % 2 === 1
-                      ? 'text-transparent [-webkit-text-stroke:1px_rgba(241,237,228,0.38)]'
-                      : 'text-bone'
+                      ? 'outline-text'
+                      : index % 3 === 2
+                        ? 'text-bone/22'
+                        : 'text-bone'
                   }`}
                 >
                   {discipline}
@@ -97,13 +100,13 @@ export default function KineticBand() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1680px] px-4 sm:px-8 lg:hidden">
-          <div className="border-t border-white/10">
+        <div className="section-frame relative z-10 lg:hidden">
+          <div className="border-t border-white/12">
             {disciplines.map((discipline, index) => (
               <p
                 key={discipline}
-                className={`flex items-center justify-between gap-4 border-b border-white/10 py-3 font-heading text-[clamp(2rem,9vw,3.2rem)] font-semibold uppercase leading-none tracking-[-0.05em] ${
-                  index % 2 === 1 ? 'text-bone/55' : 'text-bone'
+                className={`flex items-center justify-between gap-4 border-b border-white/12 py-3.5 font-display text-[clamp(2rem,9vw,3.2rem)] font-bold uppercase leading-none tracking-[-0.045em] ${
+                  index % 2 === 1 ? 'text-bone/42' : 'text-bone'
                 }`}
               >
                 <span>{discipline}</span>
@@ -116,17 +119,22 @@ export default function KineticBand() {
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto w-full max-w-[1680px] px-4 sm:px-8">
-          <div className="mt-12 flex flex-col justify-between gap-8 border-t border-white/10 pt-6 sm:flex-row sm:items-end">
-            <p className="max-w-md text-base leading-relaxed text-bone/72">
-              One senior team, from first thought to final build. No hand-offs, no dilution — just work
-              that performs as well as it looks.
-            </p>
+        <div className="section-frame relative z-10">
+          <div className="mt-12 flex flex-col justify-between gap-8 border-t border-white/12 pt-6 sm:flex-row sm:items-end">
+            <div>
+              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/40">
+                How it all connects
+              </p>
+              <p className="mt-3 max-w-md text-[15px] leading-[1.75] text-bone/68">
+                One senior team, from first thought to final build. No hand-offs, no dilution — just
+                work that performs as well as it looks.
+              </p>
+            </div>
             <Magnetic strength={0.2}>
               <button
                 type="button"
                 onClick={() => scrollToSection('contact')}
-                className="group inline-flex items-center gap-3 rounded-full border border-white/20 px-5 py-3 font-mono text-[12px] uppercase tracking-[0.16em] text-bone transition-colors hover:border-royal hover:text-royal"
+                className="group inline-flex items-center gap-3 rounded-full border border-white/20 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-bone transition-colors hover:border-royal hover:text-royal"
               >
                 Start a project
                 <Asterisk

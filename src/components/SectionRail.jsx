@@ -7,14 +7,15 @@ const sections = [
   { id: 'services', label: 'Services', index: '02' },
   { id: 'work', label: 'Work', index: '03' },
   { id: 'process', label: 'Process', index: '04' },
-  { id: 'contact', label: 'Contact', index: '06' },
+  { id: 'contact', label: 'Contact', index: '05' },
 ]
 
 export default function SectionRail() {
   const [active, setActive] = useState('home')
 
   useEffect(() => {
-    const elements = sections.map((section) => document.getElementById(section.id)).filter(Boolean)
+    const ids = [...sections.map((section) => section.id), 'why', 'approach']
+    const elements = ids.map((id) => document.getElementById(id)).filter(Boolean)
 
     const observer = new IntersectionObserver(
       (entries) => {

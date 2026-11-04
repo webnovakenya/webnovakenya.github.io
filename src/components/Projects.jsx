@@ -37,8 +37,8 @@ function KindBadge({ project, reduced, compact = false }) {
     <motion.span
       animate={reduced ? undefined : { y: [0, -3, 0], rotate: [-0.6, 0.6, -0.6] }}
       transition={reduced ? undefined : { duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
-      className={`pointer-events-none inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#060a14]/65 font-mono uppercase text-bone/72 shadow-[0_12px_35px_rgba(0,0,0,.28)] backdrop-blur-xl ${
-        compact ? 'px-2 py-1 text-[8px] tracking-[0.14em]' : 'px-2.5 py-1.5 text-[9px] tracking-[0.16em]'
+      className={`pointer-events-none inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#060a14]/70 font-mono uppercase text-bone/72 shadow-[0_12px_35px_rgba(0,0,0,.28)] backdrop-blur-xl ${
+        compact ? 'px-2 py-1 text-[8px] tracking-[0.14em]' : 'px-2.5 py-1.5 text-[9px] tracking-[0.14em]'
       }`}
     >
       <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: project.accent }} />
@@ -223,19 +223,19 @@ function ProjectCard({ project, order, onOpen, reduced }) {
         onBlur={handleLeave}
         aria-haspopup="dialog"
         aria-label={`Open ${project.title} concept case study`}
-        className="group relative flex h-full w-full flex-col overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#070b13] text-left shadow-[0_25px_80px_rgba(0,0,0,.32)] transition-[border-color,box-shadow] duration-500 hover:border-white/22 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+        className="group relative flex h-full w-full flex-col overflow-hidden rounded-[1.45rem] border border-white/10 bg-[#080c14] text-left shadow-[0_25px_80px_rgba(0,0,0,.3)] transition-[border-color,box-shadow] duration-500 hover:border-white/22 hover:shadow-[0_35px_100px_rgba(0,0,0,.42)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         style={{ willChange: 'transform' }}
       >
         <span
-          className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.025)_34%,rgba(6,8,15,.22)_66%,rgba(255,255,255,.045))]"
+          className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(155deg,rgba(255,255,255,.055),transparent_42%,rgba(91,120,255,.025))]"
           aria-hidden="true"
         />
         <span
-          className="pointer-events-none absolute inset-px z-0 rounded-[calc(1.6rem-1px)] bg-[#080d18]/94 backdrop-blur-2xl"
+          className="pointer-events-none absolute inset-x-12 top-0 z-10 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
           aria-hidden="true"
         />
         <span
-          className="pointer-events-none absolute inset-x-12 top-0 z-10 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px origin-left scale-x-0 bg-royal transition-transform duration-700 group-hover:scale-x-100"
           aria-hidden="true"
         />
         <span
@@ -292,37 +292,21 @@ function ProjectCard({ project, order, onOpen, reduced }) {
               )}
             </div>
 
-            <span className="absolute right-4 top-4 z-30 grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-[#060a14]/60 text-bone/75 backdrop-blur-md transition-all duration-300 group-hover:border-white/35 group-hover:bg-[#060a14]/80 group-hover:text-bone sm:right-5 sm:top-5">
-              <ArrowUpRight
-                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                strokeWidth={1.5}
-              />
-            </span>
-
-            <motion.span
-              animate={reduced ? undefined : { y: [0, -4, 0], rotate: [-0.8, 0.8, -0.8] }}
-              transition={reduced ? undefined : { duration: 7.5, repeat: Infinity, ease: 'easeInOut', delay: 1.1 }}
-              className="pointer-events-none absolute bottom-3 right-3 z-30 flex items-center gap-2 rounded-full border border-white/14 bg-[#060a14]/72 px-2.5 py-1.5 font-mono text-[8px] uppercase tracking-[0.14em] text-bone/58 shadow-[0_12px_30px_rgba(0,0,0,.3)] backdrop-blur-xl"
-              aria-hidden="true"
-            >
-              <span className="h-1 w-1 rounded-full" style={{ backgroundColor: project.accent }} />
-              {project.tags[0]}
-            </motion.span>
           </div>
 
-          <div className="flex flex-1 flex-col p-5 sm:p-6">
-            <div className="flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.17em]">
+          <div className="flex flex-1 flex-col p-5 sm:p-7">
+            <div className="flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.15em]">
               <span style={{ color: project.accent }}>{project.category}</span>
-              <span className="text-bone/32">
+              <span className="text-bone/30">
                 {project.isConcept ? 'Concept' : 'Project'} {String(order).padStart(2, '0')} /{' '}
                 {String(projects.length).padStart(2, '0')}
               </span>
             </div>
 
-            <h3 className="mt-3 font-heading text-[clamp(1.7rem,2.7vw,2.5rem)] font-semibold leading-none tracking-[-0.045em] text-bone">
+            <h3 className="mt-3 font-display text-[clamp(1.75rem,2.7vw,2.4rem)] font-bold uppercase leading-[0.92] tracking-[-0.045em] text-bone">
               {project.title}
             </h3>
-            <p className="mt-3 line-clamp-2 max-w-xl text-sm leading-relaxed text-bone/55 sm:text-[15px]">
+            <p className="mt-3 line-clamp-2 max-w-xl text-[14px] leading-[1.7] text-bone/58 sm:text-[15px]">
               {project.description}
             </p>
 
@@ -331,15 +315,17 @@ function ProjectCard({ project, order, onOpen, reduced }) {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-white/10 bg-white/[0.025] px-2 py-1 font-mono text-[8px] uppercase tracking-[0.13em] text-bone/42 backdrop-blur-sm"
+                    className="rounded-full border border-white/10 bg-white/[0.025] px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.11em] text-bone/48"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-              <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/50 transition-colors group-hover:text-bone">
-                Open case study
-                <span className="h-px w-5 bg-current opacity-40 transition-transform duration-300 group-hover:scale-x-150" />
+              <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-bone/55 transition-colors group-hover:text-royal">
+                View concept
+                <span className="grid h-7 w-7 place-items-center rounded-full border border-white/12 transition-colors group-hover:border-royal">
+                  <ArrowUpRight className="h-3 w-3" strokeWidth={1.5} />
+                </span>
               </span>
             </div>
           </div>
@@ -460,44 +446,52 @@ export default function Projects() {
       </div>
       <div className="noise pointer-events-none absolute inset-0 opacity-70" aria-hidden="true" />
 
-      <div className="relative mx-auto w-full max-w-[1680px] px-4 sm:px-8">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <div className="section-frame relative">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/12 pb-5">
+          <Eyebrow index="03">Interactive concepts</Eyebrow>
+          <span className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-bone/50">
+            <span className="h-1.5 w-1.5 rounded-full bg-royal" />
+            Self-initiated / built end-to-end
+          </span>
+        </div>
+
+        <div className="mt-14 grid gap-10 sm:mt-20 lg:grid-cols-12 lg:items-end">
           <Reveal className="lg:col-span-7">
-            <Eyebrow index="03">Interactive concepts</Eyebrow>
             <SplitHeading
               lines={['Work that earns', 'attention.']}
-              className="mt-6 max-w-3xl font-heading text-[clamp(2.6rem,5.5vw,5.5rem)] font-semibold leading-[0.96] tracking-[-0.05em]"
+              className="font-display text-[clamp(2.8rem,6vw,6rem)] font-bold uppercase leading-[0.88] tracking-[-0.05em]"
             />
           </Reveal>
           <Reveal className="lg:col-span-4 lg:col-start-9" delay={0.1}>
-            <p className="max-w-md text-base leading-relaxed text-bone/62 sm:text-base">
+            <p className="max-w-md text-[15px] leading-[1.8] text-bone/66 sm:text-base">
               A set of interactive concept builds, brought to life end-to-end — strategy, design and
               engineering. Step inside any example to see the thinking, the interface and the details.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-bone/42">
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/42">
               <span>
-                <span className="text-bone/72">{String(projects.length).padStart(2, '0')}</span> concepts
+                <span className="text-bone/78">{String(projects.length).padStart(2, '0')}</span> concepts
               </span>
               <span className="h-px w-5 bg-white/15" />
               <span>
-                <span className="text-bone/72">{String(webCount).padStart(2, '0')}</span> web
+                <span className="text-bone/78">{String(webCount).padStart(2, '0')}</span> web
               </span>
               <span className="h-px w-5 bg-white/15" />
               <span>
-                <span className="text-bone/72">{String(appCount).padStart(2, '0')}</span> app
+                <span className="text-bone/78">{String(appCount).padStart(2, '0')}</span> app
               </span>
             </div>
           </Reveal>
         </div>
 
-        <div className="mt-12 border-y border-white/10 bg-white/[0.015] backdrop-blur-sm sm:mt-16">
+        <div className="mt-12 flex flex-col gap-4 border-y border-white/12 py-4 sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
           <div
-            className="grid grid-cols-2 gap-1 py-2 sm:flex sm:overflow-x-auto"
+            className="flex flex-wrap gap-1.5"
             role="tablist"
             aria-label="Concept project categories"
           >
             {WORK_CATEGORIES.map((category, index) => {
               const isActive = category === activeCategory
+              const count = projects.filter((project) => project.category === category).length
               return (
                 <button
                   key={category}
@@ -512,22 +506,24 @@ export default function Projects() {
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => setActiveCategory(category)}
                   onKeyDown={(event) => handleTabKeyDown(event, index)}
-                  className={`relative w-full px-2 py-2.5 text-center font-mono text-[9px] uppercase tracking-[0.12em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal sm:w-auto sm:shrink-0 sm:px-4 sm:text-left sm:text-[11px] sm:tracking-[0.14em] ${
-                    isActive ? 'text-bone' : 'text-bone/40 hover:text-bone/70'
+                  className={`group inline-flex items-center gap-2 rounded-full border px-3.5 py-2.5 font-mono text-[9px] uppercase tracking-[0.1em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal sm:px-4 sm:text-[10px] ${
+                    isActive
+                      ? 'border-bone bg-bone text-ink'
+                      : 'border-white/12 text-bone/48 hover:border-white/28 hover:text-bone/80'
                   }`}
                 >
-                  {isActive && (
-                    <motion.span
-                      layoutId="work-tab-indicator"
-                      className="absolute inset-0 rounded-sm border border-royal/45 bg-royal/10 shadow-[0_0_28px_rgba(79,111,255,.12)]"
-                      transition={{ duration: reduceMotion ? 0 : 0.45, ease: EASE }}
-                    />
-                  )}
-                  <span className="relative z-10">{category}</span>
+                  {category}
+                  <span className={`text-[8px] ${isActive ? 'text-ink/45' : 'text-bone/28'}`}>
+                    {String(count).padStart(2, '0')}
+                  </span>
                 </button>
               )
             })}
           </div>
+          <p className="hidden items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/32 sm:flex">
+            Select a discipline
+            <span className="h-px w-6 bg-white/15" />
+          </p>
         </div>
 
         <div

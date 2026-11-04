@@ -51,14 +51,24 @@ export default function Hero({ ready }) {
       id="home"
       className="relative isolate min-h-[100svh] overflow-hidden bg-ink"
     >
+      <div className="pointer-events-none absolute inset-0 dark-grid opacity-45" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            'radial-gradient(ellipse 62% 58% at 77% 38%, rgba(91,120,255,0.13), transparent 63%), radial-gradient(ellipse 55% 65% at 6% 40%, rgba(255,107,70,0.045), transparent 66%), linear-gradient(180deg, rgba(8,10,15,0) 0%, rgba(8,10,15,0.55) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
       <motion.div
         ref={orbRef}
-        className="pointer-events-none absolute -right-[26%] top-[13%] aspect-square w-[92%] sm:-right-[10%] sm:top-[10%] sm:w-[62%] lg:right-[-4%] lg:top-[3%] lg:w-[50vw] lg:max-w-[800px]"
-        initial={reduced ? false : { opacity: 0, scale: 0.9 }}
+        className="pointer-events-none absolute -right-[42%] top-[16%] z-0 aspect-square w-[122%] opacity-70 sm:-right-[18%] sm:top-[10%] sm:w-[78%] sm:opacity-90 lg:right-[-7%] lg:top-[4%] lg:w-[55vw] lg:max-w-[860px] lg:opacity-100"
+        initial={reduced ? false : { opacity: 0, scale: 0.88 }}
         animate={show ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 1.7, ease: EASE, delay: 0.2 }}
+        transition={{ duration: 1.9, ease: EASE, delay: 0.15 }}
       >
-        <div className="h-full w-full opacity-60 sm:opacity-90 lg:opacity-100">
+        <div className="h-full w-full">
           {show &&
             (sceneReady ? (
               <Suspense fallback={<HeroFallback />}>
@@ -71,62 +81,86 @@ export default function Hero({ ready }) {
       </motion.div>
 
       <div
-        className="pointer-events-none absolute inset-0 z-[1]"
-        style={{
-          background:
-            'radial-gradient(ellipse 70% 55% at 74% 30%, rgba(79,111,255,0.09), transparent 60%), radial-gradient(ellipse 65% 72% at 8% 55%, rgba(6,8,15,0.52), transparent 72%)',
-        }}
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-40 bg-gradient-to-b from-ink via-ink/45 to-transparent"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-44 bg-gradient-to-b from-ink/75 via-ink/25 to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-36 bg-gradient-to-t from-ink/90 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-44 bg-gradient-to-t from-ink via-ink/65 to-transparent"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1680px] flex-col px-4 pb-0 pt-28 sm:px-8 lg:pt-32">
+      <div className="pointer-events-none absolute right-[7%] top-[21%] z-[2] hidden items-center gap-3 xl:flex" aria-hidden="true">
+        <span className="h-px w-12 bg-gradient-to-r from-transparent to-white/30" />
+        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/50">
+          Sculpted in light
+        </span>
+        <span className="h-1.5 w-1.5 rounded-full bg-royal shadow-[0_0_18px_rgba(91,120,255,0.8)]" />
+      </div>
+
+      <motion.div
+        className="glass-panel pointer-events-none absolute bottom-[29%] right-[5%] z-[2] hidden w-56 rounded-2xl p-4 xl:block"
+        initial={reduced ? false : { opacity: 0, y: 24 }}
+        animate={show ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.9, ease: EASE, delay: 1 }}
+        aria-hidden="true"
+      >
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/50">Studio status</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-royal" />
+        </div>
+        <p className="mt-3 font-heading text-[15px] font-semibold leading-snug text-bone">
+          Open for select projects in 2026.
+        </p>
+        <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/45">
+          <span>Nairobi / Worldwide</span>
+          <Asterisk className="h-3 w-3 text-rust" />
+        </div>
+      </motion.div>
+
+      <div className="section-frame relative z-10 flex min-h-[100svh] flex-col pb-0 pt-24 lg:pt-28">
         <motion.div
-          className="flex items-center justify-between gap-4 border-b border-white/10 pb-4 font-mono text-[11px] uppercase tracking-[0.24em] text-bone/80 sm:pb-5 sm:text-[11px]"
+          className="flex items-center justify-between gap-4 border-b border-white/12 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-bone/62"
           initial={reduced ? false : { opacity: 0 }}
           animate={show ? { opacity: 1 } : {}}
           transition={{ duration: 1, ease: EASE, delay: 0.1 }}
         >
           <span className="flex items-center gap-2.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-royal" />
+            <span className="h-1.5 w-1.5 rounded-full bg-royal shadow-[0_0_12px_rgba(91,120,255,0.8)]" />
             Independent digital studio
           </span>
-          <span className="hidden sm:block">Est. 2026 — Working worldwide</span>
-          <span className="sm:hidden">Est. 2026</span>
-          <span className="hidden items-center gap-2 whitespace-nowrap [text-shadow:0_1px_12px_rgba(6,8,15,0.9)] xl:flex">
+          <span className="hidden sm:block">Nairobi — Working worldwide</span>
+          <span className="sm:hidden">Nairobi / Worldwide</span>
+          <span className="hidden items-center gap-2 whitespace-nowrap xl:flex">
             <Asterisk className="h-3 w-3 text-rust" strokeWidth={1.5} />
-            Digital craftsmanship
+            Est. 2026
           </span>
         </motion.div>
 
-        <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-12 lg:py-12">
-          <div className="max-w-2xl lg:col-span-8">
+        <div className="grid flex-1 items-center gap-8 py-6 lg:grid-cols-12 lg:py-5">
+          <div className="min-w-0 max-w-[54rem] lg:col-span-7 xl:col-span-7">
             <motion.p
-              className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.24em] text-bone/70"
+              className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-bone/62"
               initial={reduced ? false : { opacity: 0, y: 12 }}
               animate={show ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, ease: EASE, delay: 0.35 }}
             >
-              <span className="h-px w-8 bg-bone/30" />
-              Creative development agency
+              <span className="h-px w-8 bg-royal" />
+              Creative development agency / 2026
             </motion.p>
 
             <motion.h2
-              className="mt-5 font-heading text-[clamp(2.1rem,4.2vw,4.4rem)] font-semibold leading-[0.98] tracking-[-0.05em] text-bone"
-              initial={reduced ? false : { opacity: 0, y: 24 }}
+              className="display-title mt-5 text-[clamp(2rem,10vw,2.7rem)] text-bone sm:text-[clamp(2.7rem,6vw,6rem)]"
+              initial={reduced ? false : { opacity: 0, y: 26 }}
               animate={show ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, ease: EASE, delay: 0.45 }}
+              transition={{ duration: 1.05, ease: EASE, delay: 0.45 }}
             >
-              Digital experiences that
-              <br className="hidden sm:block" />
-              {' '}refuse to be ignored.
+              Digital
+              <br />
+              experiences
+              <br />
+              that refuse to
+              <br className="sm:hidden" />{' '}
+              <span className="text-royal">be ignored.</span>
             </motion.h2>
 
             <motion.div
@@ -134,22 +168,22 @@ export default function Hero({ ready }) {
               animate={show ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, ease: EASE, delay: 0.6 }}
             >
-              <p className="mt-5 max-w-md text-base leading-relaxed text-bone/72 sm:text-base">
+              <p className="mt-7 max-w-[31rem] text-[15px] leading-[1.75] text-bone/68 sm:text-base">
                 We design and build websites, storefronts and platforms for ambitious brands — work
                 that is felt in the first three seconds and remembered long after.
               </p>
 
-              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 sm:mt-8">
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <Magnetic strength={0.25}>
                   <button
                     type="button"
                     onClick={() => scrollToSection('contact')}
-                    className="group inline-flex items-center gap-3 rounded-full bg-royal px-6 py-3.5 text-[12px] font-semibold uppercase tracking-[0.12em] text-ink transition-colors duration-300 hover:bg-bone sm:text-[13px]"
+                    className="group inline-flex items-center gap-3 rounded-full bg-bone px-6 py-3.5 text-[11px] font-bold uppercase tracking-[0.12em] text-ink transition-colors duration-300 hover:bg-royal sm:text-[12px]"
                   >
                     Start a project
                     <ArrowUpRight
                       className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      strokeWidth={2}
+                      strokeWidth={2.2}
                     />
                   </button>
                 </Magnetic>
@@ -157,7 +191,7 @@ export default function Hero({ ready }) {
                 <button
                   type="button"
                   onClick={() => scrollToSection('work')}
-                  className="group inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.12em] text-bone/80 transition-colors hover:text-bone sm:text-[13px]"
+                  className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-bone/70 transition-colors hover:text-bone"
                 >
                   See selected work
                   <ArrowRight
@@ -166,10 +200,17 @@ export default function Hero({ ready }) {
                   />
                 </button>
               </div>
+
+              <div className="mt-9 flex max-w-md flex-wrap gap-x-7 gap-y-3 border-t border-white/10 pt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-bone/50">
+                <span>Strategy</span>
+                <span>Design</span>
+                <span>Engineering</span>
+                <span className="text-royal">Three disciplines / one studio</span>
+              </div>
             </motion.div>
           </div>
 
-          <div className="hidden lg:col-span-4 lg:block" aria-hidden="true" />
+          <div className="hidden lg:col-span-5 lg:block" aria-hidden="true" />
         </div>
 
         <motion.div
@@ -178,7 +219,7 @@ export default function Hero({ ready }) {
           animate={show ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, ease: EASE, delay: 0.55 }}
         >
-          <div className="mb-5 flex items-center justify-between gap-4 border-t border-white/10 pt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-bone/75 sm:text-[11px]">
+          <div className="mb-5 flex items-center justify-between gap-4 border-t border-white/12 pt-4 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/62">
             <button
               type="button"
               onClick={() => scrollToSection('about')}
@@ -191,11 +232,11 @@ export default function Hero({ ready }) {
             </button>
 
             <span className="hidden items-center gap-5 whitespace-nowrap xl:flex">
-              <span>0 projects delivered yet</span>
+              <span>Concept-led</span>
               <span className="h-px w-5 bg-white/15" />
-              <span>Launched 2026</span>
+              <span>Senior-built</span>
               <span className="h-px w-5 bg-white/15" />
-              <span>Worldwide services</span>
+              <span>Globally minded</span>
             </span>
 
             <span className="hidden items-center gap-2 whitespace-nowrap sm:flex">

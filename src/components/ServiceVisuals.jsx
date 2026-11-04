@@ -111,7 +111,7 @@ function BookingVisual() {
       <div className="flex items-center justify-between">
         <div>
           <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/70">Reserve a table</p>
-          <p className="mt-1 font-heading text-lg font-semibold">August 2026</p>
+          <p className="mt-1 font-display text-lg font-bold uppercase tracking-[-0.03em]">August 2026</p>
         </div>
         <div className="flex gap-1.5">
           <span className="grid h-6 w-6 place-items-center border border-white/10 text-[11px] text-bone/75">←</span>
@@ -214,7 +214,7 @@ function AppVisual() {
       <div className="flex items-start justify-between">
         <div>
           <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/70">Operations OS</p>
-          <p className="mt-1 font-heading text-lg font-semibold">Revenue overview</p>
+          <p className="mt-1 font-display text-lg font-bold uppercase leading-none tracking-[-0.03em]">Revenue overview</p>
         </div>
         <span className="flex items-center gap-1.5 border border-royal/25 bg-royal/10 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.12em] text-royal">
           <span className="h-1 w-1 rounded-full bg-royal" /> Live
@@ -229,8 +229,8 @@ function AppVisual() {
         <svg viewBox="0 0 300 120" className="mt-3 h-28 w-full" role="presentation">
           <defs>
             <linearGradient id="serviceChartFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#4f6fff" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#4f6fff" stopOpacity="0" />
+              <stop offset="0%" stopColor="#5b78ff" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#5b78ff" stopOpacity="0" />
             </linearGradient>
           </defs>
           {[20, 50, 80, 110].map((y) => (
@@ -243,7 +243,7 @@ function AppVisual() {
           <path
             d="M0 100 C20 95 30 78 48 80 C70 82 82 58 102 62 C124 66 136 40 156 44 C176 48 188 68 208 58 C230 47 244 24 264 30 C282 35 290 18 300 12"
             fill="none"
-            stroke="#4f6fff"
+            stroke="#5b78ff"
             strokeWidth="1.8"
             className="chart-line"
             strokeLinecap="round"

@@ -27,11 +27,11 @@ function DesktopDevice({ project, layoutId, reduced }) {
           <span className="h-1.5 w-1.5 rounded-full bg-white/10" />
           <span className="ml-2 flex min-w-0 flex-1 items-center gap-1.5 rounded-full border border-white/8 bg-black/20 px-2.5 py-1">
             <span className="h-1 w-1 rounded-full" style={{ backgroundColor: project.accent }} />
-            <span className="truncate font-mono text-[7px] uppercase tracking-[0.14em] text-white/30">
+            <span className="truncate font-mono text-[8px] uppercase tracking-[0.12em] text-white/42">
               {project.id}.webnova.studio
             </span>
           </span>
-          <span className="hidden font-mono text-[7px] uppercase tracking-[0.14em] text-white/18 sm:block">
+          <span className="hidden font-mono text-[8px] uppercase tracking-[0.12em] text-white/28 sm:block">
             Live
           </span>
         </div>
@@ -54,7 +54,7 @@ function DesktopDevice({ project, layoutId, reduced }) {
         </div>
         <div className="flex items-center justify-between px-2 pb-1 pt-[0.42rem]">
           <span className="h-1 w-1 rounded-full bg-white/20" />
-          <span className="font-mono text-[6px] uppercase tracking-[0.18em] text-white/16">Webnova / device study</span>
+          <span className="font-mono text-[7px] uppercase tracking-[0.16em] text-white/26">Webnova / device study</span>
           <span className="h-1 w-1 rounded-full bg-white/12" />
         </div>
       </div>
@@ -358,12 +358,12 @@ export default function HybridShowcase({ project, layoutId }) {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => setDeviceView(view.id)}
-                className="relative rounded-xl px-2 py-2 text-[8px] font-medium uppercase tracking-[0.12em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal sm:px-3 sm:text-[9px]"
+                className="relative rounded-xl px-2 py-2 text-[9px] font-medium uppercase tracking-[0.1em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-royal sm:px-3 sm:text-[10px]"
               >
                 {isActive && (
                   <motion.span
                     layoutId="device-view-active"
-                    className="absolute inset-0 rounded-xl border border-royal/45 bg-royal/12 shadow-[0_0_22px_rgba(79,111,255,.12)]"
+                    className="absolute inset-0 rounded-xl border border-royal/45 bg-royal/12 shadow-[0_0_22px_rgba(91,120,255,.14)]"
                     transition={{ duration: reduceMotion ? 0 : 0.4, ease: EASE }}
                   />
                 )}
@@ -375,7 +375,7 @@ export default function HybridShowcase({ project, layoutId }) {
             )
           })}
         </div>
-        <p className="flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.18em] text-bone/28">
+        <p className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/45">
           <span className="h-px w-5 bg-white/14" />
           Desktop / mobile / tablet
         </p>
@@ -440,7 +440,7 @@ export default function HybridShowcase({ project, layoutId }) {
         />
       </div>
 
-      <div className="mt-1 flex items-center justify-center gap-3 font-mono text-[8px] uppercase tracking-[0.18em] text-bone/24">
+      <div className="mt-1 flex items-center justify-center gap-3 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/38">
         <span className="h-px w-8 bg-white/10" />
         Move to explore / switch devices above
         <span className="h-px w-8 bg-white/10" />

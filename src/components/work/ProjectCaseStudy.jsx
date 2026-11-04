@@ -126,9 +126,9 @@ function CountUp({ value, decimals = 0, prefix = '', suffix = '' }) {
 
 function SectionMarker({ index, children }) {
   return (
-    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-bone/38">
+    <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-bone/52">
       <span className="text-royal">{index}</span>
-      <span className="h-px w-7 bg-white/15" />
+      <span className="h-px w-7 bg-white/18" />
       <span>{children}</span>
     </div>
   )
@@ -328,7 +328,7 @@ export default function ProjectCaseStudy({
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="group inline-flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/62 transition-colors hover:text-bone focus-visible:text-bone"
+            className="group inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-bone/70 transition-colors hover:text-bone focus-visible:text-bone"
           >
             <ArrowLeft
               className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-0.5"
@@ -338,14 +338,14 @@ export default function ProjectCaseStudy({
             <span className="sm:hidden">Back</span>
           </button>
 
-          <div className="hidden items-center gap-3 font-mono text-[9px] uppercase tracking-[0.2em] text-bone/38 md:flex">
+          <div className="hidden items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/50 md:flex">
             <span style={{ color: project.accent }}>{project.category}</span>
             <span className="h-px w-5 bg-white/15" />
             <span>{kindLabel}</span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="hidden font-mono text-[9px] uppercase tracking-[0.16em] text-bone/32 sm:block">
+            <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-bone/42 sm:block">
               {String(position).padStart(2, '0')} / {String(total).padStart(2, '0')}
             </span>
             <button
@@ -392,30 +392,30 @@ export default function ProjectCaseStudy({
                 ref={headingRef}
                 tabIndex={-1}
                 id={`case-study-${project.id}`}
-                className="mt-6 max-w-xl font-heading text-[clamp(2.8rem,5.4vw,5.6rem)] font-semibold leading-[0.88] tracking-[-0.065em] outline-none"
+                className="mt-6 max-w-xl font-display text-[clamp(2.8rem,5.4vw,5.6rem)] font-bold uppercase leading-[0.84] tracking-[-0.055em] outline-none"
               >
                 {project.title}
               </h2>
 
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-bone/66 sm:text-lg">{project.description}</p>
+              <p className="mt-6 max-w-lg text-[16px] leading-[1.8] text-bone/74 sm:text-lg">{project.description}</p>
 
               <dl className="mt-8 grid max-w-lg grid-cols-2 gap-x-5 gap-y-4 border-y border-white/10 py-5 sm:grid-cols-3">
                 <div>
-                  <dt className="font-mono text-[8px] uppercase tracking-[0.18em] text-bone/32">Year</dt>
-                  <dd className="mt-1.5 text-sm text-bone/72">{project.year}</dd>
+                  <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-bone/45">Year</dt>
+                  <dd className="mt-1.5 text-sm text-bone/78">{project.year}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[8px] uppercase tracking-[0.18em] text-bone/32">Format</dt>
-                  <dd className="mt-1.5 text-sm text-bone/72">{kindLabel}</dd>
+                  <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-bone/45">Format</dt>
+                  <dd className="mt-1.5 text-sm text-bone/78">{kindLabel}</dd>
                 </div>
                 <div className="col-span-2 sm:col-span-1">
-                  <dt className="font-mono text-[8px] uppercase tracking-[0.18em] text-bone/32">Timeline</dt>
-                  <dd className="mt-1.5 text-sm text-bone/72">{project.duration}</dd>
+                  <dt className="font-mono text-[9px] uppercase tracking-[0.16em] text-bone/45">Timeline</dt>
+                  <dd className="mt-1.5 text-sm text-bone/78">{project.duration}</dd>
                 </div>
               </dl>
 
               <div className="mt-6">
-                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/32">Scope / toolkit</p>
+                <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-bone/45">Scope / toolkit</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
@@ -442,7 +442,7 @@ export default function ProjectCaseStudy({
                     />
                   </button>
                 </Magnetic>
-                <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/35">
+                <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.14em] text-bone/48">
                   <span className="h-px w-5 bg-white/18" />
                   {project.role}
                 </span>
@@ -455,7 +455,7 @@ export default function ProjectCaseStudy({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.85, ease: EASE, delay: reduceMotion ? 0 : 0.14 }}
             >
-              <div className="mb-3 flex items-center justify-between gap-4 font-mono text-[8px] uppercase tracking-[0.18em] text-bone/30">
+              <div className="mb-3 flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/42">
                 <span>{project.isConcept ? 'Hybrid concept preview' : 'Hybrid device preview'}</span>
                 <span>{project.kind === 'app' ? 'App / responsive system' : 'Web / responsive system'}</span>
               </div>
@@ -475,10 +475,10 @@ export default function ProjectCaseStudy({
               <SectionMarker index="01">Context</SectionMarker>
               <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:gap-8">
                 <div className="lg:col-span-7">
-                  <h3 className="max-w-3xl font-heading text-[clamp(1.9rem,3.6vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+                  <h3 className="max-w-3xl font-display text-[clamp(1.9rem,3.6vw,3.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.045em]">
                     The idea behind {project.title}.
                   </h3>
-                  <p className="mt-6 max-w-2xl text-lg leading-relaxed text-bone/62 sm:text-xl">
+                  <p className="mt-6 max-w-2xl text-[17px] leading-[1.8] text-bone/72 sm:text-[18px]">
                     {project.overview}
                   </p>
                 </div>
@@ -489,13 +489,13 @@ export default function ProjectCaseStudy({
                       style={{ background: `radial-gradient(circle, ${project.accent}2e, transparent 70%)` }}
                       aria-hidden="true"
                     />
-                    <p className="relative font-mono text-[9px] uppercase tracking-[0.2em] text-bone/38">The challenge</p>
-                    <p className="relative mt-4 text-[15px] leading-relaxed text-bone/60">{project.problem}</p>
+                    <p className="relative font-mono text-[10px] uppercase tracking-[0.18em] text-bone/50">The challenge</p>
+                    <p className="relative mt-4 text-[15px] leading-[1.75] text-bone/70">{project.problem}</p>
                     <div className="relative mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
                       <span className="grid h-8 w-8 place-items-center rounded-full border border-white/12">
                         <Sparkles className="h-3.5 w-3.5" style={{ color: project.accent }} strokeWidth={1.5} />
                       </span>
-                      <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-bone/32">
+                      <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-bone/45">
                         Designed as a self-initiated study
                       </span>
                     </div>
@@ -516,10 +516,10 @@ export default function ProjectCaseStudy({
             >
               <SectionMarker index="02">Experience</SectionMarker>
               <div className="mt-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-                <h3 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+                <h3 className="max-w-2xl font-display text-[clamp(1.9rem,3.6vw,3.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.045em]">
                   The details that carry the idea.
                 </h3>
-                <p className="max-w-sm text-sm leading-relaxed text-bone/45">
+                <p className="max-w-sm text-sm leading-[1.7] text-bone/58">
                   Four decisions that shape how the concept feels, reads and works.
                 </p>
               </div>
@@ -547,12 +547,12 @@ export default function ProjectCaseStudy({
                     >
                       <FeatureIcon name={feature.icon} />
                     </span>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-bone/24">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-bone/38">
                       0{index + 1}
                     </span>
                   </div>
-                  <h4 className="relative mt-5 font-heading text-xl font-semibold tracking-[-0.025em]">{feature.title}</h4>
-                  <p className="relative mt-2 max-w-md text-sm leading-relaxed text-bone/48">{feature.description}</p>
+                  <h4 className="relative mt-5 font-heading text-[19px] font-semibold tracking-[-0.025em]">{feature.title}</h4>
+                  <p className="relative mt-2 max-w-md text-[13.5px] leading-[1.7] text-bone/62">{feature.description}</p>
                 </motion.article>
               ))}
             </div>
@@ -569,10 +569,10 @@ export default function ProjectCaseStudy({
             >
               <SectionMarker index="03">Concept signals</SectionMarker>
               <div className="mt-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-                <h3 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+                <h3 className="max-w-2xl font-display text-[clamp(1.9rem,3.6vw,3.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.045em]">
                   What the experience is designed to prove.
                 </h3>
-                <span className="rounded-full border border-white/10 bg-white/[0.025] px-3 py-1.5 font-mono text-[8px] uppercase tracking-[0.16em] text-bone/32">
+                <span className="rounded-full border border-white/10 bg-white/[0.025] px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.14em] text-bone/45">
                   Illustrative targets
                 </span>
               </div>
@@ -591,7 +591,7 @@ export default function ProjectCaseStudy({
                   className={`relative p-6 sm:p-8 ${index > 0 ? 'border-t border-white/10 sm:border-l sm:border-t-0' : ''}`}
                 >
                   <p
-                    className="font-heading text-[clamp(2.2rem,4vw,4rem)] font-semibold leading-none tracking-[-0.055em]"
+                    className="font-display text-[clamp(2.2rem,4vw,4rem)] font-bold leading-none tracking-[-0.05em]"
                     style={{ color: index === 0 ? project.accent : undefined }}
                   >
                     <CountUp
@@ -601,12 +601,12 @@ export default function ProjectCaseStudy({
                       suffix={stat.suffix ?? ''}
                     />
                   </p>
-                  <p className="mt-3 text-sm font-medium text-bone/72">{stat.label}</p>
-                  <p className="mt-1 font-mono text-[8px] uppercase tracking-[0.13em] text-bone/28">{stat.note}</p>
+                  <p className="mt-3 text-sm font-medium text-bone/78">{stat.label}</p>
+                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.12em] text-bone/42">{stat.note}</p>
                 </div>
               ))}
             </motion.div>
-            <p className="mt-4 text-right font-mono text-[8px] uppercase tracking-[0.16em] text-bone/24">
+            <p className="mt-4 text-right font-mono text-[9px] uppercase tracking-[0.14em] text-bone/38">
               Illustrative concept metrics — not client results.
             </p>
           </div>
@@ -622,10 +622,10 @@ export default function ProjectCaseStudy({
             >
               <SectionMarker index="04">Process</SectionMarker>
               <div className="mt-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-                <h3 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+                <h3 className="max-w-2xl font-display text-[clamp(1.9rem,3.6vw,3.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.045em]">
                   From question to interface.
                 </h3>
-                <p className="max-w-sm text-sm leading-relaxed text-bone/45">
+                <p className="max-w-sm text-sm leading-[1.7] text-bone/58">
                   A compact concept process built to keep the thinking visible at every stage.
                 </p>
               </div>
@@ -659,11 +659,11 @@ export default function ProjectCaseStudy({
                         style={{ backgroundColor: project.accent }}
                       />
                     </span>
-                    <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/28">
+                    <p className="mt-5 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/42">
                       Phase 0{index + 1}
                     </p>
-                    <h4 className="mt-2 font-heading text-xl font-semibold tracking-[-0.025em]">{step.title}</h4>
-                    <p className="mt-2 max-w-xs text-sm leading-relaxed text-bone/46">{step.description}</p>
+                    <h4 className="mt-2 font-heading text-[19px] font-semibold tracking-[-0.025em]">{step.title}</h4>
+                    <p className="mt-2 max-w-xs text-[13.5px] leading-[1.7] text-bone/58">{step.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -681,10 +681,10 @@ export default function ProjectCaseStudy({
             >
               <SectionMarker index="05">Screens</SectionMarker>
               <div className="mt-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-                <h3 className="max-w-2xl font-heading text-[clamp(1.9rem,3.6vw,3.6rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+                <h3 className="max-w-2xl font-display text-[clamp(1.9rem,3.6vw,3.5rem)] font-bold uppercase leading-[0.92] tracking-[-0.045em]">
                   A closer look at the surface.
                 </h3>
-                <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-bone/28">
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-bone/42">
                   Generated concept screens
                 </span>
               </div>
@@ -708,7 +708,7 @@ export default function ProjectCaseStudy({
                       <div className="aspect-[16/10]">
                         <GalleryVisual project={project} device={device.type} />
                       </div>
-                      <span className="absolute right-3 top-3 z-20 rounded-full border border-white/12 bg-[#060a14]/70 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.14em] text-bone/52 backdrop-blur-md">
+                      <span className="absolute right-3 top-3 z-20 rounded-full border border-white/12 bg-[#060a14]/70 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] text-bone/60 backdrop-blur-md">
                         {device.label}
                       </span>
                       <div
@@ -719,10 +719,10 @@ export default function ProjectCaseStudy({
                     </div>
                     <figcaption className="mt-3 flex items-start justify-between gap-4">
                       <span>
-                        <span className="block font-mono text-[8px] uppercase tracking-[0.16em] text-bone/32">
+                        <span className="block font-mono text-[9px] uppercase tracking-[0.14em] text-bone/42">
                           0{index + 1} / {item.title}
                         </span>
-                        <span className="mt-1.5 block text-sm leading-relaxed text-bone/48">{item.caption}</span>
+                        <span className="mt-1.5 block text-[13.5px] leading-[1.65] text-bone/58">{item.caption}</span>
                       </span>
                       <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-bone/22" strokeWidth={1.5} />
                     </figcaption>
@@ -748,7 +748,7 @@ export default function ProjectCaseStudy({
                 aria-hidden="true"
               />
               <SectionMarker index="06">Illustrative stakeholder note</SectionMarker>
-              <blockquote className="relative mt-6 max-w-4xl font-heading text-[clamp(1.55rem,3vw,3rem)] font-medium leading-[1.08] tracking-[-0.04em] text-bone/88">
+              <blockquote className="relative mt-6 max-w-4xl font-display text-[clamp(1.55rem,3vw,3rem)] font-bold leading-[1.06] tracking-[-0.035em] text-bone/90">
                 “{project.testimonial.quote}”
               </blockquote>
               <div className="relative mt-7 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -756,13 +756,13 @@ export default function ProjectCaseStudy({
                   {project.testimonial.name.charAt(0)}
                 </span>
                 <span>
-                  <span className="block text-sm font-medium text-bone/70">{project.testimonial.name}</span>
-                  <span className="mt-0.5 block font-mono text-[8px] uppercase tracking-[0.14em] text-bone/28">
+                  <span className="block text-sm font-medium text-bone/78">{project.testimonial.name}</span>
+                  <span className="mt-0.5 block font-mono text-[9px] uppercase tracking-[0.12em] text-bone/42">
                     {project.testimonial.role}
                   </span>
                 </span>
               </div>
-              <p className="relative mt-6 max-w-xl border-t border-white/10 pt-4 font-mono text-[8px] uppercase leading-relaxed tracking-[0.14em] text-bone/24">
+              <p className="relative mt-6 max-w-xl border-t border-white/10 pt-4 font-mono text-[9px] uppercase leading-relaxed tracking-[0.12em] text-bone/38">
                 Fictional persona created for this concept study. Not a client testimonial.
               </p>
             </motion.div>
@@ -787,11 +787,11 @@ export default function ProjectCaseStudy({
               />
               <div className="relative flex flex-col justify-between gap-8 md:flex-row md:items-end">
                 <div>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-bone/38">Your project next</p>
-                  <h3 className="mt-4 max-w-2xl font-heading text-[clamp(2rem,4vw,4rem)] font-semibold leading-[0.94] tracking-[-0.055em]">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-bone/52">Your project next</p>
+                  <h3 className="mt-4 max-w-2xl font-display text-[clamp(2rem,4vw,4rem)] font-bold uppercase leading-[0.9] tracking-[-0.045em]">
                     Want this level of care on something real?
                   </h3>
-                  <p className="mt-4 max-w-lg text-sm leading-relaxed text-bone/48">
+                  <p className="mt-4 max-w-lg text-sm leading-[1.7] text-bone/58">
                     The concept ends here. The next conversation can start with your brief.
                   </p>
                 </div>
@@ -820,8 +820,8 @@ export default function ProjectCaseStudy({
                 <span className="flex min-w-0 items-center gap-3">
                   <ChevronLeft className="h-4 w-4 shrink-0 text-bone/30 transition-transform group-hover:-translate-x-0.5" strokeWidth={1.5} />
                   <span className="min-w-0">
-                    <span className="block font-mono text-[8px] uppercase tracking-[0.16em] text-bone/28">Previous project</span>
-                    <span className="mt-1 block truncate text-sm font-medium text-bone/65">{previousProject?.title}</span>
+                    <span className="block font-mono text-[9px] uppercase tracking-[0.14em] text-bone/42">Previous project</span>
+                    <span className="mt-1 block truncate text-sm font-medium text-bone/72">{previousProject?.title}</span>
                   </span>
                 </span>
                 <ArrowLeft className="hidden h-4 w-4 text-bone/20 sm:block" strokeWidth={1.2} />
@@ -833,8 +833,8 @@ export default function ProjectCaseStudy({
               >
                 <span className="flex min-w-0 items-center gap-3">
                   <span className="min-w-0">
-                    <span className="block font-mono text-[8px] uppercase tracking-[0.16em] text-bone/28">Next project</span>
-                    <span className="mt-1 block truncate text-sm font-medium text-bone/65">{nextProject?.title}</span>
+                    <span className="block font-mono text-[9px] uppercase tracking-[0.14em] text-bone/42">Next project</span>
+                    <span className="mt-1 block truncate text-sm font-medium text-bone/72">{nextProject?.title}</span>
                   </span>
                   <ChevronRight className="h-4 w-4 shrink-0 text-bone/30 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
@@ -843,7 +843,7 @@ export default function ProjectCaseStudy({
             </div>
 
             {project.isConcept && (
-              <p className="mt-8 max-w-2xl font-mono text-[8px] uppercase leading-relaxed tracking-[0.14em] text-bone/22">
+              <p className="mt-8 max-w-2xl font-mono text-[9px] uppercase leading-relaxed tracking-[0.12em] text-bone/36">
                 This is a self-initiated concept study, not a delivered client project. Metrics are
                 illustrative and the stakeholder note is a fictional persona.
               </p>
