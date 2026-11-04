@@ -189,9 +189,11 @@ function ProjectCard({ project, order, onOpen, reduced }) {
             >
               <ProjectMockup project={project} />
             </motion.div>
-            <span className="absolute left-4 top-4 z-10 border border-white/20 bg-[#06080f]/75 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/85 backdrop-blur-sm">
-              Concept
-            </span>
+            {project.isConcept && (
+              <span className="absolute left-4 top-4 z-10 border border-white/20 bg-[#06080f]/75 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/85 backdrop-blur-sm">
+                Concept
+              </span>
+            )}
             <span className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border border-white/15 bg-[#06080f]/60 text-bone/75 backdrop-blur-sm transition-colors duration-300 group-hover:border-white/35 group-hover:text-bone">
               <ArrowUpRight
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -203,7 +205,10 @@ function ProjectCard({ project, order, onOpen, reduced }) {
           <div className="flex flex-1 flex-col p-5 sm:p-6">
             <div className="flex items-center justify-between gap-4 font-mono text-[9px] uppercase tracking-[0.17em]">
               <span style={{ color: project.accent }}>{project.category}</span>
-              <span className="text-bone/32">Concept {String(order).padStart(2, '0')} / 08</span>
+              <span className="text-bone/32">
+                {project.isConcept ? 'Concept' : 'Project'} {String(order).padStart(2, '0')} /{' '}
+                {String(projects.length).padStart(2, '0')}
+              </span>
             </div>
 
             <h3 className="mt-3 font-heading text-[clamp(1.7rem,2.7vw,2.5rem)] font-semibold leading-none tracking-[-0.045em] text-bone">
@@ -310,9 +315,9 @@ export default function Projects() {
               engineering. Open any example to step inside the thinking.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-bone/42">
-              <span>08 concept projects</span>
+              <span>{String(projects.filter((project) => project.isConcept).length).padStart(2, '0')} concept projects</span>
               <span className="h-px w-8 bg-white/15" />
-              <span>04 categories</span>
+              <span>{String(WORK_CATEGORIES.length).padStart(2, '0')} categories</span>
             </div>
           </Reveal>
         </div>

@@ -13,7 +13,7 @@ function BrowserBar({ project, compact }) {
       <div className="ml-2 flex min-w-0 flex-1 items-center gap-2 border border-white/10 bg-white/[0.035] px-2 py-0.5">
         <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: project.accent }} />
         <span className="truncate font-mono text-[7px] uppercase tracking-[0.14em] text-white/35">
-          concept / {project.id}
+          {project.isConcept ? 'concept' : 'project'} / {project.id}
         </span>
       </div>
       <span className="hidden font-mono text-[7px] uppercase tracking-[0.14em] text-white/22 sm:block">

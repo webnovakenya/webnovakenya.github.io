@@ -165,7 +165,7 @@ export default function ProjectCaseStudy({ project, onClose, onStart }) {
       <div className="sticky top-0 z-20 border-b border-white/10 bg-[#06080f]/90 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-[1600px] items-center justify-between px-4 sm:px-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-bone/55">
-            Concept case study / {project.category}
+            {project.isConcept ? 'Concept case study' : 'Case study'} / {project.category}
           </span>
           <button
             ref={closeRef}
@@ -190,9 +190,11 @@ export default function ProjectCaseStudy({ project, onClose, onStart }) {
           transition={{ duration: reduceMotion ? 0 : 0.6, ease: EASE, delay: reduceMotion ? 0 : 0.12 }}
         >
           <div className="flex flex-wrap items-center gap-3">
-            <span className="border border-royal/40 bg-royal/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-royal">
-              Concept
-            </span>
+            {project.isConcept && (
+              <span className="border border-royal/40 bg-royal/10 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-royal">
+                Concept
+              </span>
+            )}
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-bone/45">{project.category}</span>
           </div>
 
@@ -219,10 +221,12 @@ export default function ProjectCaseStudy({ project, onClose, onStart }) {
             </div>
           </div>
 
-          <p className="mt-8 max-w-md border-l border-white/15 pl-4 text-sm leading-relaxed text-bone/48">
-            This is a self-initiated concept study, not a delivered client project. It is here to show
-            how we think, design and build.
-          </p>
+          {project.isConcept && (
+            <p className="mt-8 max-w-md border-l border-white/15 pl-4 text-sm leading-relaxed text-bone/48">
+              This is a self-initiated concept study, not a delivered client project. It is here to
+              show how we think, design and build.
+            </p>
+          )}
 
           <button
             type="button"
@@ -244,7 +248,7 @@ export default function ProjectCaseStudy({ project, onClose, onStart }) {
           transition={{ duration: reduceMotion ? 0 : 0.7, ease: EASE, delay: reduceMotion ? 0 : 0.08 }}
         >
           <div className="mb-5 flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.18em] text-bone/38">
-            <span>Responsive concept preview</span>
+            <span>{project.isConcept ? 'Responsive concept preview' : 'Responsive preview'}</span>
             <span>Desktop / Mobile</span>
           </div>
           <DeviceStill project={project} reduced={reduceMotion} />
